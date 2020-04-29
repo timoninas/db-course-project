@@ -1,2 +1,1 @@
-# simple-shop
-Course project on databases
+# Simple shop
