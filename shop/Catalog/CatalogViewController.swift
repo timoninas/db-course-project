@@ -11,6 +11,8 @@ import UIKit
 class CatalogViewController: UIViewController {
     
     private let reuseIdentifier = "showSubject"
+    
+    let images = ["nmd1", "zx2", "nmd1"]
 
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -19,7 +21,6 @@ class CatalogViewController: UIViewController {
         
         self.collectionView.dataSource = self
         self.collectionView.delegate = self
-        self.collectionView!.register(CatalogViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
     }
     
     @IBAction func filterButton(_ sender: UIButton) {
@@ -42,14 +43,26 @@ class CatalogViewController: UIViewController {
 }
 
 extension CatalogViewController: UICollectionViewDataSource {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        1
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        15
+        images.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! CatalogViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "showSubject", for: indexPath) as! CatalogViewCell
         
         cell.backgroundColor = .gray
+        let imageName = images[indexPath.item]
+        let image = UIImage(named: imageName)
+        
+        if cell.mainImageView != nil {
+            print("kek")
+            cell.mainImageView.image = image
+            cell.mainImageView.contentMode = .scaleAspectFill
+        }
         
         return cell
     }
@@ -63,14 +76,14 @@ extension CatalogViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let itemPerRow: CGFloat = 2
-        let paddingWidth = 13 * (itemPerRow + 1)
-        let availableWidth = collectionView.frame.width - paddingWidth
-        let widthPerItem = availableWidth / itemPerRow
+        let paddingWidth = 5 * (itemPerRow)
+        let availableWidth: CGFloat = collectionView.frame.width - paddingWidth
+        let widthPerItem: CGFloat = availableWidth / itemPerRow
         
         return CGSize(width: widthPerItem, height: widthPerItem * 1.91)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        UIEdgeInsets(top: 20, left: 13, bottom: 20, right: 13)
+        UIEdgeInsets(top: 20, left: 5, bottom: 20, right: 5)
     }
 }

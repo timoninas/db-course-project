@@ -10,4 +10,5 @@ import UIKit
 
 class CatalogViewCell: UICollectionViewCell {
     
+    @IBOutlet weak var mainImageView: UIImageView!
 }

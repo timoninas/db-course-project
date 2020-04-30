@@ -19,7 +19,7 @@ class FavouriteCollectionViewController: UICollectionViewController {
         // self.clearsSelectionOnViewWillAppear = false
 
         // Register cell classes
-        self.collectionView!.register(CatalogViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        self.collectionView!.register(CatalogViewCell.self, forCellWithReuseIdentifier: "showFavouriteSubject")
 
         // Do any additional setup after loading the view.
     }
@@ -92,7 +92,7 @@ extension FavouriteCollectionViewController: UICollectionViewDelegateFlowLayout 
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let itemPerRow: CGFloat = 2
-        let paddingWidth = 13 * (itemPerRow + 1)
+        let paddingWidth = 7 * (itemPerRow + 1)
         let availableWidth = collectionView.frame.width - paddingWidth
         let widthPerItem = availableWidth / itemPerRow
         
@@ -100,6 +100,6 @@ extension FavouriteCollectionViewController: UICollectionViewDelegateFlowLayout 
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        UIEdgeInsets(top: 20, left: 13, bottom: 20, right: 13)
+        UIEdgeInsets(top: 20, left: 5, bottom: 20, right: 5)
     }
 }
