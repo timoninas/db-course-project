@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>329670557239-iq2gdfoil5h8l3sh1u2hhdq1e4m8b457.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.329670557239-iq2gdfoil5h8l3sh1u2hhdq1e4m8b457</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBUyySn6ejzKTzut_7-umLaFJyB0NWjStw</string>
+	<key>GCM_SENDER_ID</key>
+	<string>329670557239</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>codeweb.shop</string>
+	<key>PROJECT_ID</key>
+	<string>simple-shop-dcc93</string>
+	<key>STORAGE_BUCKET</key>
+	<string>simple-shop-dcc93.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:329670557239:ios:48d01e5452e5a44a7189b2</string>
+	<key>DATABASE_URL</key>
+	<string>https://simple-shop-dcc93.firebaseio.com</string>
+</dict>
+</plist>
