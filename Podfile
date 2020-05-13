@@ -9,5 +9,6 @@ target 'shop' do
   pod 'Firebase/Core'
   pod 'Firebase/Database'
   pod 'Firebase/Auth'
+  pod 'Kingfisher', :git => 'https://github.com/onevcat/Kingfisher'
 
 end

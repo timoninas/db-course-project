@@ -21,8 +21,15 @@ class DetailSubjectViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let img = UIImage(data: product.imageData!) {
-            mainImageView.image = img
+        if product.imageData != nil {
+            if let img = UIImage(data: product.imageData!) {
+                mainImageView.image = img
+            }
+        }
+        
+        if product.imageURLString != nil {
+            guard let url = URL(string: (product.imageURLString)!) else { return }
+            self.mainImageView.kf.setImage(with: url)
         }
         
         idLabel.text = "id: \(product.id)"

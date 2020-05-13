@@ -7,31 +7,70 @@
 //
 
 import UIKit
+import Firebase
+import Kingfisher
 
 class CatalogViewController: UICollectionViewController {
     private let reuseIdentifier = "showSubject"
     var products = [Product]()
+    
+    var ref:DatabaseReference?
+    var databaseHandle: DatabaseHandle?
+    
     let images = ["nmd1", "zx2", "ultra", "three", "zx2", "zx2", "three", "ultra", "three", "zx2", "nmd1", "zx2", "ultra", "three"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        var k = 0
+        ref = Database.database().reference()
+        self.databaseHandle = self.ref?.child("subject").observe(.value, with: {[weak self] (snapshot) in
+            let subjects = snapshot.value as? [[String:Any]]
+            //let imageURL = subject?["imageURL"] as? String
+            let subjectCount = subjects?.count
+            
+            for i in 0..<subjectCount! {
+                let subject = subjects![i]
+                let id = subject["id"] as? Int
+                let imageURL = subject["imageURL"] as? String
+                let length = subject["length"] as? Int
+                let name = subject["name"] as? String
+                let weight = subject["weight"] as? Int
+                let price = subject["price"] as? Int
+                let width = subject["width"] as? Int
+                
+                let product = Product(id: id!, price: price!, weight: weight!, length: length!, width: width!, name: name!, imageURLString: imageURL!)
+                print(product)
+                print(self?.products)
+                
+                self?.products.append(product)
+                self?.collectionView.reloadData()
+            }
+        })
         
-        for nameImage in images {
-            let productImg = UIImage(named: nameImage)
-            let dataImg = productImg?.pngData()
-            
-            let product = Product()
-            product.imageData = dataImg
-            product.id = k; k += 1
-            product.length = Int.random(in: 0...150)
-            product.weight = Int.random(in: 0...150)
-            product.width = Int.random(in: 0...150)
-            product.price = Int.random(in: 0...100)
-            product.name = nameImage
-            
-            products.append(product)
+
+//        var k = 0
+        
+//        for nameImage in images {
+//            let productImg = UIImage(named: nameImage)
+//            let dataImg = productImg?.pngData()
+//
+//            let product = Product()
+//            product.imageData = dataImg
+//            product.id = k; k += 1
+//            product.length = Int.random(in: 0...150)
+//            product.weight = Int.random(in: 0...150)
+//            product.width = Int.random(in: 0...150)
+//            product.price = Int.random(in: 0...100)
+//            product.name = nameImage
+//
+//            products.append(product)
+//        }
+    }
+    
+    
+    @IBAction func updateProducts(_ sender: Any) {
+        for product in products {
+            print(product)
         }
     }
     
@@ -61,7 +100,7 @@ class CatalogViewController: UICollectionViewController {
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return images.count
+        return products.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

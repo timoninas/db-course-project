@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class CatalogViewCell: UICollectionViewCell {
     var product: Product? = Product()
@@ -16,8 +17,16 @@ class CatalogViewCell: UICollectionViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     
     override func didMoveToWindow() {
-        guard let imgData = product?.imageData, let image = UIImage(data: imgData) else { return }
-        mainImageView.image = image
+        if product?.imageData != nil {
+            guard let imgData = product?.imageData, let image = UIImage(data: imgData) else { return }
+            mainImageView.image = image
+        }
+        
+        if product?.imageURLString != nil {
+            guard let url = URL(string: (product?.imageURLString)!) else { return }
+            self.mainImageView.kf.setImage(with: url)
+        }
+        
         mainImageView.contentMode = .scaleAspectFit
         priceLabel.text = "\(product?.price ?? 0)"
         nameLabel.text = "\(product?.name ?? "Nah")"

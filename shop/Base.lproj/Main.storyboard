@@ -2,7 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="trU-ik-SuG">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -133,7 +133,13 @@
                             <outlet property="delegate" destination="wb7-9l-CTY" id="DRJ-50-uOC"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" title="Каталог" id="maj-Fw-2Jg"/>
+                    <navigationItem key="navigationItem" title="Каталог" id="maj-Fw-2Jg">
+                        <barButtonItem key="rightBarButtonItem" title="Item" id="Ljv-kC-h4S">
+                            <connections>
+                                <action selector="updateProducts:" destination="wb7-9l-CTY" id="Nyo-B2-vPn"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mv6-Nk-JH7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -364,7 +370,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="qsg-3X-mhj">
-                                <rect key="frame" x="0.0" y="308" width="375" height="504"/>
+                                <rect key="frame" x="0.0" y="283.66666666666669" width="375" height="528.33333333333326"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="Jew-Oc-yla">
@@ -377,31 +383,106 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="2QT-fO-fjA">
-                                <rect key="frame" x="8" y="98" width="359" height="210"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="vIH-wf-r2H">
+                                <rect key="frame" x="16" y="98.999999999999986" width="343" height="173.66666666666663"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Имя" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="m5F-3x-WK5">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Имя" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KDg-65-zYB">
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="20.333333333333332"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Фамилия" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AVp-t6-bms">
+                                        <rect key="frame" x="0.0" y="38.333333333333343" width="343" height="20.333333333333329"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Почта" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ApC-PS-bWJ">
+                                        <rect key="frame" x="0.0" y="76.666666666666657" width="343" height="20.333333333333329"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Телефон" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tmm-PF-piY">
+                                        <rect key="frame" x="0.0" y="115" width="343" height="20.333333333333343"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Номер карты" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kdH-1h-v3n">
+                                        <rect key="frame" x="0.0" y="153.33333333333334" width="343" height="20.333333333333343"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="qsg-3X-mhj" secondAttribute="bottom" id="215-FV-nLU"/>
+                            <constraint firstItem="qsg-3X-mhj" firstAttribute="top" secondItem="vIH-wf-r2H" secondAttribute="bottom" constant="11" id="3uh-5e-FPA"/>
+                            <constraint firstItem="vIH-wf-r2H" firstAttribute="top" secondItem="eVL-tm-hsC" secondAttribute="top" constant="11" id="Dyu-HK-A7Y"/>
+                            <constraint firstItem="vIH-wf-r2H" firstAttribute="leading" secondItem="eVL-tm-hsC" secondAttribute="leading" constant="16" id="JOP-XJ-WNz"/>
+                            <constraint firstItem="qsg-3X-mhj" firstAttribute="leading" secondItem="eVL-tm-hsC" secondAttribute="leading" id="bCS-8l-jYm"/>
+                            <constraint firstItem="eVL-tm-hsC" firstAttribute="trailing" secondItem="vIH-wf-r2H" secondAttribute="trailing" constant="16" id="oMM-Zb-Fg6"/>
+                            <constraint firstItem="qsg-3X-mhj" firstAttribute="trailing" secondItem="eVL-tm-hsC" secondAttribute="trailing" id="oW0-JG-dZ9"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="eVL-tm-hsC"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="6pE-mS-7xi">
+                        <rightBarButtonItems>
+                            <barButtonItem title="Редактировать" id="9e5-0b-WaM">
+                                <connections>
+                                    <segue destination="ExP-Uk-Ubb" kind="show" id="Fzh-MX-aR6"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Выйти" id="sEn-hf-9Uc">
+                                <connections>
+                                    <action selector="logoutTapped:" destination="ksb-JQ-tfQ" id="yYt-OL-Xzg"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aDy-Wh-qjb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1965.5999999999999" y="51.724137931034484"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="j52-ek-HI2">
+            <objects>
+                <viewController id="ExP-Uk-Ubb" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="eHq-is-DLf">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="NRB-0s-zfs">
+                                <rect key="frame" x="8" y="108" width="359" height="250"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Имя" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Pjl-jg-3V2">
                                         <rect key="frame" x="0.0" y="0.0" width="359" height="34"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Фамилия" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5PA-PM-uTq">
-                                        <rect key="frame" x="0.0" y="44" width="359" height="34"/>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Фамилия" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nId-Mn-g47">
+                                        <rect key="frame" x="0.0" y="54" width="359" height="34"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Почта" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XEc-5k-D2w">
-                                        <rect key="frame" x="0.0" y="88" width="359" height="34"/>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Почта" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TdE-qr-D50">
+                                        <rect key="frame" x="0.0" y="108" width="359" height="34"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Телефон" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="huy-pW-Qa3">
-                                        <rect key="frame" x="0.0" y="132" width="359" height="34"/>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Телефон" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="k9b-Qd-pZQ">
+                                        <rect key="frame" x="0.0" y="162" width="359" height="34"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Номер карты" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UYD-8R-JVw">
-                                        <rect key="frame" x="0.0" y="176" width="359" height="34"/>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Номер карты" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DgZ-fd-lJP">
+                                        <rect key="frame" x="0.0" y="216" width="359" height="34"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
@@ -410,27 +491,19 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="2QT-fO-fjA" firstAttribute="top" secondItem="eVL-tm-hsC" secondAttribute="top" constant="10" id="1IQ-hc-HYH"/>
-                            <constraint firstAttribute="bottom" secondItem="qsg-3X-mhj" secondAttribute="bottom" id="215-FV-nLU"/>
-                            <constraint firstItem="eVL-tm-hsC" firstAttribute="trailing" secondItem="2QT-fO-fjA" secondAttribute="trailing" constant="8" id="CmP-zb-5sb"/>
-                            <constraint firstItem="qsg-3X-mhj" firstAttribute="leading" secondItem="eVL-tm-hsC" secondAttribute="leading" id="bCS-8l-jYm"/>
-                            <constraint firstItem="qsg-3X-mhj" firstAttribute="top" secondItem="2QT-fO-fjA" secondAttribute="bottom" id="i1Z-FV-UQc"/>
-                            <constraint firstItem="2QT-fO-fjA" firstAttribute="leading" secondItem="eVL-tm-hsC" secondAttribute="leading" constant="8" id="kIn-dc-3ts"/>
-                            <constraint firstItem="qsg-3X-mhj" firstAttribute="trailing" secondItem="eVL-tm-hsC" secondAttribute="trailing" id="oW0-JG-dZ9"/>
+                            <constraint firstItem="Kob-kd-Rcd" firstAttribute="trailing" secondItem="NRB-0s-zfs" secondAttribute="trailing" constant="8" id="XLP-85-Ab7"/>
+                            <constraint firstItem="NRB-0s-zfs" firstAttribute="top" secondItem="Kob-kd-Rcd" secondAttribute="top" constant="20" id="pNU-rS-eeg"/>
+                            <constraint firstItem="NRB-0s-zfs" firstAttribute="leading" secondItem="Kob-kd-Rcd" secondAttribute="leading" constant="8" id="t1R-Cj-HBt"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="eVL-tm-hsC"/>
+                        <viewLayoutGuide key="safeArea" id="Kob-kd-Rcd"/>
                     </view>
-                    <navigationItem key="navigationItem" id="6pE-mS-7xi">
-                        <barButtonItem key="rightBarButtonItem" title="Выйти" id="sEn-hf-9Uc">
-                            <connections>
-                                <action selector="logoutTapped:" destination="ksb-JQ-tfQ" id="yYt-OL-Xzg"/>
-                            </connections>
-                        </barButtonItem>
+                    <navigationItem key="navigationItem" id="hJm-1l-AcP">
+                        <barButtonItem key="rightBarButtonItem" title="Сохранить" id="Wq2-FX-KwX"/>
                     </navigationItem>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="aDy-Wh-qjb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2Hn-1Q-JqC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1965.5999999999999" y="51.724137931034484"/>
+            <point key="canvasLocation" x="2749.5999999999999" y="51.724137931034484"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="u7P-wE-SNv">
