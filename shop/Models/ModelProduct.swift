@@ -8,9 +8,10 @@
 
 import UIKit
 
-class Product {
+struct Product {
     var id: Int = 0
     var price: Int = 0
+    var type: String = ""
     var weight: Int = 0
     var length: Int? = 0
     var width: Int? = 0
@@ -25,10 +26,20 @@ class Product {
 //    name tovar
 //    picture
     
+    init() {
+        self.type = ""
+        self.id = 0
+        self.price = 0
+        self.weight = 0
+        self.length = 0
+        self.width = 0
+        self.name = ""
+        self.imageData = nil
+    }
     
-    convenience init(id: Int, price: Int, weight: Int, length: Int, width: Int, name: String, imageData: Data) {
-        self.init()
-        
+    
+    init(id: Int, price: Int, type: String, weight: Int, length: Int, width: Int, name: String, imageData: Data) {
+        self.type = type
         self.id = id
         self.price = price
         self.weight = weight
@@ -38,11 +49,13 @@ class Product {
         self.imageData = imageData
     }
     
-    convenience init(id: Int, price: Int, weight: Int, length: Int, width: Int, name: String, imageURLString: String) {
-        self.init()
+    
+    
+    init(id: Int, price: Int, type: String, weight: Int, length: Int, width: Int, name: String, imageURLString: String) {
         
         self.id = id
         self.price = price
+        self.type = type
         self.weight = weight
         self.length = length
         self.width = width

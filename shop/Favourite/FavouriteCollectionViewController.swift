@@ -10,7 +10,7 @@ import UIKit
 
 class FavouriteCollectionViewController: UICollectionViewController {
     
-    private let reuseIdentifier = "showFavouriteSubject"
+    private let reuseIdentifier = "cell"
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,7 +19,7 @@ class FavouriteCollectionViewController: UICollectionViewController {
         // self.clearsSelectionOnViewWillAppear = false
 
         // Register cell classes
-        self.collectionView!.register(CatalogViewCell.self, forCellWithReuseIdentifier: "showFavouriteSubject")
+//        self.collectionView!.register(UITableViewCell.self, forCellWithReuseIdentifier: "cell")
 
         // Do any additional setup after loading the view.
     }
@@ -48,7 +48,7 @@ class FavouriteCollectionViewController: UICollectionViewController {
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "showFavouriteSubject", for: indexPath) as! CatalogViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
         
         cell.backgroundColor = .green
     

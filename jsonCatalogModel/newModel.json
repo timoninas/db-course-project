@@ -1,0 +1,57 @@
+{
+  "subject" : [ {
+    "id" : 0,
+    "type": "shoes",
+    "imageURL" : "https://assets.adidas.com/images/w_840,h_840,f_auto,q_auto:sensitive,fl_lossy/31e37d966a8a4d27badaab4101232dab_9366/Krossovki_Microbounce_T1_chernyj_FV8266_01_standard.jpg",
+    "length" : 28,
+    "name" : "КРОССОВКИ MICROBOUNCE T1",
+    "price" : 11999,
+    "weight" : 500,
+    "width" : 15
+  }, {
+    "id" : 1,
+    "type": "shoes",
+    "imageURL" : "https://assets.adidas.com/images/w_320,h_320,f_auto,q_auto:sensitive,fl_lossy/cf9e3e9fdcb24750941dab2200c7caf4_9366/Krossovki_Torsion_TRDC_seryj_EG8444_01_standard.jpg",
+    "length" : 26,
+    "name" : "КРОССОВКИ TORSION TRDC",
+    "price" : 9999,
+    "weight" : 450,
+    "width" : 15
+  }, {
+    "id" : 2,
+    "type": "clothes",
+    "imageURL" : "https://assets.adidas.com/images/w_840,h_840,f_auto,q_auto:sensitive,fl_lossy/311e9515500441fe93cbabaa00f7d73d_9366/Futbolka_Trefoil_Moskva_belyj_GT7436_01_laydown.jpg",
+    "length" : 80,
+    "name" : "ФУТБОЛКА TREFOIL МОСКВА",
+    "price" : 2999,
+    "weight" : 550,
+    "width" : 55
+  }, {
+    "id" : 3,
+    "type": "accessories",
+    "imageURL" : "https://assets.adidas.com/images/w_840,h_840,f_auto,q_auto:sensitive,fl_lossy/33917972dcf54cc4a9eeaa2a012414f0_9366/Tri_pary_noskov_seryj_DZ9434_03_standard.jpg",
+    "length" : 27,
+    "name" : "ТРИ ПАРЫ НОСКОВ",
+    "price" : 899,
+    "weight" : 230,
+    "width" : 15
+  }, {
+    "id" : 4,
+    "type": "shoes",
+    "imageURL" : "https://assets.adidas.com/images/w_840,h_840,f_auto,q_auto:sensitive,fl_lossy/464ab1d01211421e9f0fab1b01166948_9366/Krossovki_Supercourt_RX_sinij_FW5365_01_standard.jpg",
+    "length" : 27,
+    "name" : "КРОССОВКИ SUPERCOURT RX",
+    "price" : 10999,
+    "weight" : 230,
+    "width" : 15
+  }, {
+    "id" : 5,
+    "type": "clothes",
+    "imageURL" : "https://assets.adidas.com/images/w_840,h_840,f_auto,q_auto:sensitive,fl_lossy/4e1a0e8b1837432ba31dab020153c7e7_9366/Shorty_dlya_tennisa_Ergo_Primeblue_oranzhevyj_FK0816_21_model.jpg",
+    "length" : 27,
+    "name" : "ШОРТЫ ДЛЯ ТЕННИСА ERGO PRIMEBLUE",
+    "price" : 4499,
+    "weight" : 230,
+    "width" : 15
+  } ]
+}

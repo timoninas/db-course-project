@@ -26,10 +26,10 @@ class CatalogViewCell: UICollectionViewCell {
             guard let url = URL(string: (product?.imageURLString)!) else { return }
             self.mainImageView.kf.setImage(with: url)
         }
-        
-        mainImageView.contentMode = .scaleAspectFit
         priceLabel.text = "\(product?.price ?? 0)"
         nameLabel.text = "\(product?.name ?? "Nah")"
+//        guard mainImageView.i != nil else { return }
+        mainImageView.contentMode = .scaleAspectFit
     }
     
     override func awakeFromNib() {

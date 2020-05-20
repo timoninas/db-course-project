@@ -8,13 +8,14 @@
 
 import UIKit
 
-class DetailSubjectViewController: UIViewController {
+class DetailSubjectViewController: UITableViewController {
     var product = Product()
 
     @IBOutlet weak var mainImageView: UIImageView!
     @IBOutlet weak var idLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
+    @IBOutlet weak var typeLabel: UILabel!
     @IBOutlet weak var sizeLabel: UILabel!
     @IBOutlet weak var weightLabel: UILabel!
     
@@ -35,6 +36,7 @@ class DetailSubjectViewController: UIViewController {
         idLabel.text = "id: \(product.id)"
         nameLabel.text = product.name
         priceLabel.text = "Цена: \(product.price) руб."
+        typeLabel.text = "Тип товара: \(product.type)"
         sizeLabel.text = "Размер: \(product.width ?? 0)x\(product.length ?? 0) см"
         weightLabel.text = "Вес: \(product.weight) кг"
 

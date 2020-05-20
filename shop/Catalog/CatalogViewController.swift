@@ -10,14 +10,13 @@ import UIKit
 import Firebase
 import Kingfisher
 
-class CatalogViewController: UICollectionViewController {
+final class CatalogViewController: UICollectionViewController {
     private let reuseIdentifier = "showSubject"
     var products = [Product]()
+    var filteredProducts = [Product]()
     
     var ref:DatabaseReference?
     var databaseHandle: DatabaseHandle?
-    
-    let images = ["nmd1", "zx2", "ultra", "three", "zx2", "zx2", "three", "ultra", "three", "zx2", "nmd1", "zx2", "ultra", "three"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,40 +31,53 @@ class CatalogViewController: UICollectionViewController {
                 let subject = subjects![i]
                 let id = subject["id"] as? Int
                 let imageURL = subject["imageURL"] as? String
+                let type = subject["type"] as? String
                 let length = subject["length"] as? Int
                 let name = subject["name"] as? String
                 let weight = subject["weight"] as? Int
                 let price = subject["price"] as? Int
                 let width = subject["width"] as? Int
                 
-                let product = Product(id: id!, price: price!, weight: weight!, length: length!, width: width!, name: name!, imageURLString: imageURL!)
-                print(product)
-                print(self?.products)
+                let product = Product(id: id!, price: price!, type: type!, weight: weight!, length: length!, width: width!, name: name!, imageURLString: imageURL!)
                 
                 self?.products.append(product)
                 self?.collectionView.reloadData()
             }
         })
         
-
-//        var k = 0
-        
-//        for nameImage in images {
-//            let productImg = UIImage(named: nameImage)
-//            let dataImg = productImg?.pngData()
-//
-//            let product = Product()
-//            product.imageData = dataImg
-//            product.id = k; k += 1
-//            product.length = Int.random(in: 0...150)
-//            product.weight = Int.random(in: 0...150)
-//            product.width = Int.random(in: 0...150)
-//            product.price = Int.random(in: 0...100)
-//            product.name = nameImage
-//
-//            products.append(product)
-//        }
     }
+    
+    @IBAction func filterButtonTapped(_ sender: UIBarButtonItem) {
+        
+        let alert = UIAlertController(title: "You can filtered products", message: "Chose your interest category", preferredStyle: .actionSheet)
+
+        alert.addAction(UIAlertAction(title: "Все товары", style: .default, handler: nil))
+        alert.addAction(UIAlertAction(title: "Одежда", style: .default, handler: {action in
+            self.makeFilter(choice: "clothes")
+        }))
+        alert.addAction(UIAlertAction(title: "Обувь", style: .default, handler: {action in
+            self.makeFilter(choice: "shoes")
+        }))
+        alert.addAction(UIAlertAction(title: "Аксессуары", style: .default, handler: {action in
+            self.makeFilter(choice: "accessories")
+        }))
+        self.present(alert, animated: true)
+        self.collectionView.reloadData()
+    }
+    
+    func makeFilter(choice: String) {
+        self.filteredProducts.removeAll()
+        for product in self.products {
+            if product.type == choice {
+                print(product)
+                self.filteredProducts.append(product)
+            }
+        }
+        self.products = self.filteredProducts
+        
+    }
+    
+
     
     
     @IBAction func updateProducts(_ sender: Any) {
@@ -106,7 +118,7 @@ class CatalogViewController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "showSubject", for: indexPath) as! CatalogViewCell
         
-        cell.backgroundColor = .gray
+        cell.backgroundColor = #colorLiteral(red: 0.9219360948, green: 0.9164555669, blue: 0.9261488914, alpha: 1)
         cell.product = products[indexPath.item]
         return cell
     }
