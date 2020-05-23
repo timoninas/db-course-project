@@ -26,7 +26,7 @@ class CatalogViewCell: UICollectionViewCell {
             guard let url = URL(string: (product?.imageURLString)!) else { return }
             self.mainImageView.kf.setImage(with: url)
         }
-        priceLabel.text = "\(product?.price ?? 0)"
+        priceLabel.text = "\(product?.price ?? 0),00 руб."
         nameLabel.text = "\(product?.name ?? "Nah")"
 //        guard mainImageView.i != nil else { return }
         mainImageView.contentMode = .scaleAspectFit

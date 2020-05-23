@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import FirebaseFirestore
 import Kingfisher
 
 final class CatalogViewController: UICollectionViewController {
@@ -17,40 +18,53 @@ final class CatalogViewController: UICollectionViewController {
     
     var ref:DatabaseReference?
     var databaseHandle: DatabaseHandle?
+    private var requestsCollectionRef: CollectionReference!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        ref = Database.database().reference()
-        self.databaseHandle = self.ref?.child("subject").observe(.value, with: {[weak self] (snapshot) in
-            let subjects = snapshot.value as? [[String:Any]]
-            //let imageURL = subject?["imageURL"] as? String
-            let subjectCount = subjects?.count
-            
-            for i in 0..<subjectCount! {
-                let subject = subjects![i]
-                let id = subject["id"] as? Int
-                let imageURL = subject["imageURL"] as? String
-                let type = subject["type"] as? String
-                let length = subject["length"] as? Int
-                let name = subject["name"] as? String
-                let weight = subject["weight"] as? Int
-                let price = subject["price"] as? Int
-                let width = subject["width"] as? Int
-                
-                let product = Product(id: id!, price: price!, type: type!, weight: weight!, length: length!, width: width!, name: name!, imageURLString: imageURL!)
-                
-                self?.products.append(product)
+        
+        requestsCollectionRef = Firestore.firestore().collection("catalog-products")
+        
+        requestsCollectionRef.getDocuments { [weak self] (snapshot, error) in
+            if let error = error {
+                debugPrint("Error fetching requests: \(error)")
+            } else {
+                let snek = snapshot
+                guard let snap = snapshot else { return }
+                for product in snap.documents {
+                    let data = product.data()
+                    let docID = product.documentID
+                    
+                    let id = data["id"] as? Int ?? 0
+                    let imageURL = data["imageURL"] as? String ?? ""
+                    let name = data["name"] as? String ?? ""
+                    let length = data["length"] as? Int ?? 0
+                    let price = data["price"] as? Int ?? 0
+                    let type = data["type"] as? String ?? ""
+                    let weight = data["weight"] as? Int ?? 0
+                    let width = data["width"] as? Int ?? 0
+                    
+                    var newProduct = Product(id: id, price: price, type: type, weight: weight, length: length, width: width, name: name, imageURLString: imageURL)
+                    
+                    self?.products.append(newProduct)
+                    self?.filteredProducts.append(newProduct)
+                    
+                }
                 self?.collectionView.reloadData()
             }
-        })
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
         
     }
     
     @IBAction func filterButtonTapped(_ sender: UIBarButtonItem) {
         
         let alert = UIAlertController(title: "You can filtered products", message: "Chose your interest category", preferredStyle: .actionSheet)
-
+        
         alert.addAction(UIAlertAction(title: "Все товары", style: .default, handler: nil))
         alert.addAction(UIAlertAction(title: "Одежда", style: .default, handler: {action in
             self.makeFilter(choice: "clothes")
@@ -61,35 +75,25 @@ final class CatalogViewController: UICollectionViewController {
         alert.addAction(UIAlertAction(title: "Аксессуары", style: .default, handler: {action in
             self.makeFilter(choice: "accessories")
         }))
+        alert.addAction(UIAlertAction(title: "Отмена", style: .cancel))
         self.present(alert, animated: true)
         self.collectionView.reloadData()
     }
     
     func makeFilter(choice: String) {
         self.filteredProducts.removeAll()
-        for product in self.products {
-            if product.type == choice {
-                print(product)
-                self.filteredProducts.append(product)
-            }
+        if choice == "all" {
+            filteredProducts = products.filter({ (product) -> Bool in
+                return true
+            })
+        } else {
+            filteredProducts = products.filter({ (product) -> Bool in
+                if product.type == choice {
+                    return true
+                }
+                return false
+            })
         }
-        self.products = self.filteredProducts
-        
-    }
-    
-
-    
-    
-    @IBAction func updateProducts(_ sender: Any) {
-        for product in products {
-            print(product)
-        }
-    }
-    
-    @IBAction func filterButton(_ sender: UIButton) {
-    }
-    
-    @IBAction func sortButton(_ sender: UIButton) {
     }
     
     /*
@@ -123,10 +127,7 @@ final class CatalogViewController: UICollectionViewController {
         return cell
     }
     
-    
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        print("start kek")
         if segue.identifier == "detailsInfo" {
             let detailVC = segue.destination as! DetailSubjectViewController
             let cell = sender as! CatalogViewCell
@@ -151,3 +152,29 @@ extension CatalogViewController: UICollectionViewDelegateFlowLayout {
         UIEdgeInsets(top: 20, left: 10, bottom: 20, right: 10)
     }
 }
+
+//        ref = Database.database().reference()
+//        self.databaseHandle = self.ref?.child("subject").observe(.value, with: {[weak self] (snapshot) in
+//            let subjects = snapshot.value as? [[String:Any]]
+//            //let imageURL = subject?["imageURL"] as? String
+//            let subjectCount = subjects?.count
+//
+//            for i in 0..<subjectCount! {
+//
+//                let subject = subjects![i]
+//                let id = subject["id"] as? Int
+//                let imageURL = subject["imageURL"] as? String
+//                let type = subject["type"] as? String
+//                let length = subject["length"] as? Int
+//                let name = subject["name"] as? String
+//                let weight = subject["weight"] as? Int
+//                let price = subject["price"] as? Int
+//                let width = subject["width"] as? Int
+//
+//                let product = Product(id: id!, price: price!, type: type!, weight: weight!, length: length!, width: width!, name: name!, imageURLString: imageURL!)
+//
+//                self?.products.append(product)
+//                self?.filteredProducts.append(product)
+//                self?.collectionView.reloadData()
+//            }
+//        })
