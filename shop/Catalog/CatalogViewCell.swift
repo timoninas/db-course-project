@@ -9,7 +9,7 @@
 import UIKit
 import Kingfisher
 
-class CatalogViewCell: UICollectionViewCell {
+final class CatalogViewCell: UICollectionViewCell {
     var product: Product? = Product()
     
     @IBOutlet weak var mainImageView: UIImageView!
@@ -17,22 +17,27 @@ class CatalogViewCell: UICollectionViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     
     override func didMoveToWindow() {
+    }
+    
+    func setup() {
         if product?.imageData != nil {
-            guard let imgData = product?.imageData, let image = UIImage(data: imgData) else { return }
-            mainImageView.image = image
-        }
-        
-        if product?.imageURLString != nil {
-            guard let url = URL(string: (product?.imageURLString)!) else { return }
-            self.mainImageView.kf.setImage(with: url)
-        }
-        priceLabel.text = "\(product?.price ?? 0),00 руб."
-        nameLabel.text = "\(product?.name ?? "Nah")"
-//        guard mainImageView.i != nil else { return }
-        mainImageView.contentMode = .scaleAspectFit
+                    guard let imgData = product?.imageData, let image = UIImage(data: imgData) else { return }
+                    mainImageView.image = image
+                }
+                
+                if product?.imageURLString != nil {
+                    guard let url = URL(string: (product?.imageURLString)!) else { return }
+                    self.mainImageView.kf.setImage(with: url)
+                }
+                priceLabel.text = "\(product?.price ?? 0),00 руб."
+                nameLabel.text = "\(product?.name ?? "Nah")"
+        //        guard mainImageView.i != nil else { return }
+                mainImageView.contentMode = .scaleAspectFit
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
     }
 }
+
+

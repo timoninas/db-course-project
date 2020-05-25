@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class OrdersViewController: UIViewController {
+final class OrdersViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

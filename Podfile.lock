@@ -286,6 +286,11 @@ PODS:
   - nanopb/decode (0.3.9011)
   - nanopb/encode (0.3.9011)
   - PromisesObjC (1.2.8)
+  - Realm (4.4.0):
+    - Realm/Headers (= 4.4.0)
+  - Realm/Headers (4.4.0)
+  - RealmSwift (4.4.0):
+    - Realm (= 4.4.0)
 
 DEPENDENCIES:
   - Firebase/Analytics
@@ -294,6 +299,7 @@ DEPENDENCIES:
   - Firebase/Database
   - Firebase/Firestore
   - Kingfisher (from `https://github.com/onevcat/Kingfisher`)
+  - RealmSwift
 
 SPEC REPOS:
   trunk:
@@ -319,6 +325,8 @@ SPEC REPOS:
     - leveldb-library
     - nanopb
     - PromisesObjC
+    - Realm
+    - RealmSwift
 
 EXTERNAL SOURCES:
   Kingfisher:
@@ -353,7 +361,9 @@ SPEC CHECKSUMS:
   leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
   PromisesObjC: c119f3cd559f50b7ae681fa59dc1acd19173b7e6
+  Realm: e125f464884cda953ebefe70c671b75b03b81b9b
+  RealmSwift: 33656a42bd300959a081fc13347376bc478071af
 
-PODFILE CHECKSUM: 6d94588933e9c1fb7cec1ef05ead727bda238447
+PODFILE CHECKSUM: 0eb24fb26d5e0266cd31e5242031d60d714c9aab
 
 COCOAPODS: 1.9.1

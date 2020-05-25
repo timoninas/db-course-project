@@ -30,14 +30,17 @@ final class CatalogViewController: UICollectionViewController {
             if let error = error {
                 debugPrint("Error fetching requests: \(error)")
             } else {
-                let snek = snapshot
                 guard let snap = snapshot else { return }
                 for product in snap.documents {
                     let data = product.data()
-                    let docID = product.documentID
+                    //let docID = product.documentID
                     
                     let id = data["id"] as? Int ?? 0
+                    
                     let imageURL = data["imageURL"] as? String ?? ""
+                    
+                    let url = URL(string: imageURL)
+                    let dataImage = try? Data(contentsOf: url!)
                     let name = data["name"] as? String ?? ""
                     let length = data["length"] as? Int ?? 0
                     let price = data["price"] as? Int ?? 0
@@ -45,7 +48,14 @@ final class CatalogViewController: UICollectionViewController {
                     let weight = data["weight"] as? Int ?? 0
                     let width = data["width"] as? Int ?? 0
                     
-                    var newProduct = Product(id: id, price: price, type: type, weight: weight, length: length, width: width, name: name, imageURLString: imageURL)
+                    let newProduct = Product(id: id,
+                                             price: price,
+                                             type: type,
+                                             weight: weight,
+                                             length: length,
+                                             width: width,
+                                             name: name,
+                                             imageData: dataImage!)
                     
                     self?.products.append(newProduct)
                     self?.filteredProducts.append(newProduct)
@@ -77,7 +87,7 @@ final class CatalogViewController: UICollectionViewController {
         }))
         alert.addAction(UIAlertAction(title: "Отмена", style: .cancel))
         self.present(alert, animated: true)
-        self.collectionView.reloadData()
+        
     }
     
     func makeFilter(choice: String) {
@@ -87,13 +97,14 @@ final class CatalogViewController: UICollectionViewController {
                 return true
             })
         } else {
-            filteredProducts = products.filter({ (product) -> Bool in
-                if product.type == choice {
+            filteredProducts = products.filter({
+                if $0.type == choice {
                     return true
                 }
                 return false
             })
         }
+        self.collectionView.reloadData()
     }
     
     /*
@@ -116,14 +127,16 @@ final class CatalogViewController: UICollectionViewController {
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return products.count
+        return filteredProducts.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "showSubject", for: indexPath) as! CatalogViewCell
         
         cell.backgroundColor = #colorLiteral(red: 0.9219360948, green: 0.9164555669, blue: 0.9261488914, alpha: 1)
-        cell.product = products[indexPath.item]
+//        cell.mainImageView.image = nil
+        cell.product = filteredProducts[indexPath.item]
+        cell.setup()
         return cell
     }
     

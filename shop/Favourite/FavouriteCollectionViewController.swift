@@ -7,10 +7,12 @@
 //
 
 import UIKit
+import RealmSwift
 
-class FavouriteCollectionViewController: UICollectionViewController {
+final class FavouriteCollectionViewController: UICollectionViewController {
     
     private let reuseIdentifier = "cell"
+    private var filteredProducts: Results<FavouriteProduct>!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +24,11 @@ class FavouriteCollectionViewController: UICollectionViewController {
 //        self.collectionView!.register(UITableViewCell.self, forCellWithReuseIdentifier: "cell")
 
         // Do any additional setup after loading the view.
+        let image = UIImage(named: "zx1")?.pngData()
+        let favouriteProduct = FavouriteProduct(id: 2, price: 43, weight: 11, length: 24, width: 15, type: "shoes", name: "ZX1", imageData: image!)
+        //LocalStorageManagerFavourites.saveObject(favouriteProduct)
+        filteredProducts = realm.objects(FavouriteProduct.self)
+        print("added")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -49,13 +56,17 @@ class FavouriteCollectionViewController: UICollectionViewController {
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return 15
+        return filteredProducts.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
         
-        cell.backgroundColor = .green
+        let filteredProduct = filteredProducts[indexPath.row]
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "showFavouriteSubject", for: indexPath) as! FavouriteViewCell
+        
+        cell.product = filteredProduct
+        cell.setup()
     
         return cell
     }
@@ -96,15 +107,15 @@ class FavouriteCollectionViewController: UICollectionViewController {
 extension FavouriteCollectionViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let itemPerRow: CGFloat = 2
-        let paddingWidth = 7 * (itemPerRow + 1)
-        let availableWidth = collectionView.frame.width - paddingWidth
-        let widthPerItem = availableWidth / itemPerRow
-        
-        return CGSize(width: widthPerItem, height: widthPerItem * 1.91)
+    let itemPerRow: CGFloat = 2
+    let paddingWidth = 10 * (itemPerRow)
+    let availableWidth: CGFloat = collectionView.frame.width - paddingWidth
+    let widthPerItem: CGFloat = availableWidth / itemPerRow
+    
+    return CGSize(width: widthPerItem, height: widthPerItem * 1.65)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        UIEdgeInsets(top: 20, left: 5, bottom: 20, right: 5)
+        UIEdgeInsets(top: 20, left: 10, bottom: 20, right: 10)
     }
 }

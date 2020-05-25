@@ -11,5 +11,6 @@ target 'shop' do
   pod 'Firebase/Auth'
   pod 'Kingfisher', :git => 'https://github.com/onevcat/Kingfisher'
   pod 'Firebase/Firestore'
+  pod 'RealmSwift'
 
 end

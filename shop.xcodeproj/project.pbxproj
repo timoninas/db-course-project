@@ -19,6 +19,11 @@
 		774A29B2245DEFC8004A6FD1 /* ModelProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774A29B1245DEFC8004A6FD1 /* ModelProduct.swift */; };
 		774A29B5245F0C16004A6FD1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 774A29B4245F0C16004A6FD1 /* GoogleService-Info.plist */; };
 		7767A7F92459E562007BED87 /* CatalogViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7767A7F82459E562007BED87 /* CatalogViewCell.swift */; };
+		77C72140247C4AE80086742D /* NetworkStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C7213F247C4AE80086742D /* NetworkStorageManager.swift */; };
+		77C72142247C4B050086742D /* LocalStorageManagerOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C72141247C4B050086742D /* LocalStorageManagerOrder.swift */; };
+		77C72144247C4B1F0086742D /* LocalStorageManagerFavourites.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C72143247C4B1F0086742D /* LocalStorageManagerFavourites.swift */; };
+		77C7214A247C61210086742D /* FavouriteProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C72149247C61210086742D /* FavouriteProduct.swift */; };
+		77C7214C247C64C20086742D /* FavouriteViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C7214B247C64C20086742D /* FavouriteViewCell.swift */; };
 		77D01640245D979A00CE087B /* DetailSubjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D0163F245D979A00CE087B /* DetailSubjectViewController.swift */; };
 		77DBEA91245F132800959EB9 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77DBEA90245F132800959EB9 /* LoginViewController.swift */; };
 		77DBEA95245F3A6400959EB9 /* OrdersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77DBEA94245F3A6400959EB9 /* OrdersViewController.swift */; };
@@ -40,6 +45,11 @@
 		774A29B1245DEFC8004A6FD1 /* ModelProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelProduct.swift; sourceTree = "<group>"; };
 		774A29B4245F0C16004A6FD1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7767A7F82459E562007BED87 /* CatalogViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogViewCell.swift; sourceTree = "<group>"; };
+		77C7213F247C4AE80086742D /* NetworkStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkStorageManager.swift; sourceTree = "<group>"; };
+		77C72141247C4B050086742D /* LocalStorageManagerOrder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalStorageManagerOrder.swift; sourceTree = "<group>"; };
+		77C72143247C4B1F0086742D /* LocalStorageManagerFavourites.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalStorageManagerFavourites.swift; sourceTree = "<group>"; };
+		77C72149247C61210086742D /* FavouriteProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteProduct.swift; sourceTree = "<group>"; };
+		77C7214B247C64C20086742D /* FavouriteViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteViewCell.swift; sourceTree = "<group>"; };
 		77D0163F245D979A00CE087B /* DetailSubjectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailSubjectViewController.swift; sourceTree = "<group>"; };
 		77DBEA90245F132800959EB9 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		77DBEA94245F3A6400959EB9 /* OrdersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdersViewController.swift; sourceTree = "<group>"; };
@@ -85,6 +95,7 @@
 				7767A7F52459E537007BED87 /* Catalog */,
 				7767A7F62459E542007BED87 /* Favourite */,
 				7767A7F72459E548007BED87 /* Orders */,
+				77C72145247C4B240086742D /* StorageManager */,
 				772FBA8024597D3700BC5485 /* Assets.xcassets */,
 				770F51142475596D003A8776 /* Main.storyboard */,
 				772FBA8224597D3700BC5485 /* LaunchScreen.storyboard */,
@@ -98,6 +109,7 @@
 			isa = PBXGroup;
 			children = (
 				774A29B1245DEFC8004A6FD1 /* ModelProduct.swift */,
+				77C72149247C61210086742D /* FavouriteProduct.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -116,6 +128,7 @@
 			isa = PBXGroup;
 			children = (
 				774781BB2459E2C100AC3C54 /* FavouriteCollectionViewController.swift */,
+				77C7214B247C64C20086742D /* FavouriteViewCell.swift */,
 			);
 			path = Favourite;
 			sourceTree = "<group>";
@@ -127,6 +140,16 @@
 				774781B92459E2AA00AC3C54 /* OLD OrdersTableViewController.swift */,
 			);
 			path = Orders;
+			sourceTree = "<group>";
+		};
+		77C72145247C4B240086742D /* StorageManager */ = {
+			isa = PBXGroup;
+			children = (
+				77C7213F247C4AE80086742D /* NetworkStorageManager.swift */,
+				77C72141247C4B050086742D /* LocalStorageManagerOrder.swift */,
+				77C72143247C4B1F0086742D /* LocalStorageManagerFavourites.swift */,
+			);
+			path = StorageManager;
 			sourceTree = "<group>";
 		};
 		77DBEA92245F132E00959EB9 /* Login */ = {
@@ -279,13 +302,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				77C72140247C4AE80086742D /* NetworkStorageManager.swift in Sources */,
 				77DBEA91245F132800959EB9 /* LoginViewController.swift in Sources */,
 				774A29B0245DE958004A6FD1 /* CatalogViewController.swift in Sources */,
 				774A29B2245DEFC8004A6FD1 /* ModelProduct.swift in Sources */,
 				77D01640245D979A00CE087B /* DetailSubjectViewController.swift in Sources */,
 				7767A7F92459E562007BED87 /* CatalogViewCell.swift in Sources */,
+				77C72144247C4B1F0086742D /* LocalStorageManagerFavourites.swift in Sources */,
+				77C7214A247C61210086742D /* FavouriteProduct.swift in Sources */,
+				77C7214C247C64C20086742D /* FavouriteViewCell.swift in Sources */,
 				77DBEA95245F3A6400959EB9 /* OrdersViewController.swift in Sources */,
 				774781BC2459E2C100AC3C54 /* FavouriteCollectionViewController.swift in Sources */,
+				77C72142247C4B050086742D /* LocalStorageManagerOrder.swift in Sources */,
 				774781BA2459E2AA00AC3C54 /* OLD OrdersTableViewController.swift in Sources */,
 				772FBA7824597D3400BC5485 /* AppDelegate.swift in Sources */,
 				772FBA7A24597D3400BC5485 /* SceneDelegate.swift in Sources */,

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DetailSubjectViewController: UITableViewController {
+final class DetailSubjectViewController: UITableViewController {
     var product = Product()
 
     @IBOutlet weak var mainImageView: UIImageView!
