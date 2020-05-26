@@ -10,30 +10,20 @@ import UIKit
 import RealmSwift
 
 final class FavouriteCollectionViewController: UICollectionViewController {
-    
     private let reuseIdentifier = "cell"
     private var filteredProducts: Results<FavouriteProduct>!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Register cell classes
-//        self.collectionView!.register(UITableViewCell.self, forCellWithReuseIdentifier: "cell")
-
-        // Do any additional setup after loading the view.
-        let image = UIImage(named: "zx1")?.pngData()
-        let favouriteProduct = FavouriteProduct(id: 2, price: 43, weight: 11, length: 24, width: 15, type: "shoes", name: "ZX1", imageData: image!)
-        //LocalStorageManagerFavourites.saveObject(favouriteProduct)
+        
         filteredProducts = realm.objects(FavouriteProduct.self)
+        
         print("added")
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        print()
+        collectionView.reloadData()
     }
 
     /*
@@ -56,33 +46,34 @@ final class FavouriteCollectionViewController: UICollectionViewController {
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return filteredProducts.count
+        
+        return (filteredProducts != nil) ? filteredProducts.count: 0
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let filteredProduct = filteredProducts[indexPath.row]
-        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "showFavouriteSubject", for: indexPath) as! FavouriteViewCell
         
+        guard indexPath.row < filteredProducts.count else { return UICollectionViewCell() }
+        
+        let filteredProduct = filteredProducts[indexPath.row]
         cell.product = filteredProduct
         cell.setup()
-    
+        cell.completion = { [weak self] isDeleted in
+            if isDeleted {
+                self?.collectionView.deleteItems(at: [indexPath])
+            }
+        }
+        
         return cell
     }
+    
 
     // MARK: UICollectionViewDelegate
 
     /*
     // Uncomment this method to specify if the specified item should be highlighted during tracking
     override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment this method to specify if the specified item should be selected
-    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
         return true
     }
     */

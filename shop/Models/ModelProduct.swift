@@ -62,4 +62,18 @@ struct Product {
         self.name = name
         self.imageURLString = imageURLString
     }
+    
+    func productToFavouriteProduct() -> FavouriteProduct {
+        let favouriteProduct = FavouriteProduct()
+        favouriteProduct.id = self.id
+        favouriteProduct.price = self.price
+        favouriteProduct.type = self.type
+        favouriteProduct.weight = self.weight
+        favouriteProduct.length = self.length!
+        favouriteProduct.width = self.width!
+        favouriteProduct.name = self.name
+        favouriteProduct.imageData = imageData!
+        
+        return favouriteProduct
+    }
 }

@@ -54,19 +54,30 @@
                                                 </label>
                                             </subviews>
                                         </stackView>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vw6-85-lM9">
+                                            <rect key="frame" x="130" y="256" width="33" height="33"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="33" id="ERX-HM-rfT"/>
+                                                <constraint firstAttribute="width" constant="33" id="dpr-yN-lSk"/>
+                                            </constraints>
+                                            <state key="normal" image="likeFull"/>
+                                        </button>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="Vw6-85-lM9" secondAttribute="trailing" constant="7" id="2SN-E8-mB0"/>
                                         <constraint firstAttribute="trailing" secondItem="bds-mR-zyE" secondAttribute="trailing" id="BWE-fA-Q5p"/>
                                         <constraint firstAttribute="trailing" secondItem="PS9-5E-Rx0" secondAttribute="trailing" constant="8" id="SI8-Sb-k2d"/>
                                         <constraint firstItem="PS9-5E-Rx0" firstAttribute="leading" secondItem="NaQ-zu-CkY" secondAttribute="leading" constant="8" id="fab-ge-5tB"/>
                                         <constraint firstItem="PS9-5E-Rx0" firstAttribute="top" secondItem="bds-mR-zyE" secondAttribute="bottom" constant="8" id="gBa-Kh-fnJ"/>
                                         <constraint firstItem="bds-mR-zyE" firstAttribute="leading" secondItem="NaQ-zu-CkY" secondAttribute="leading" id="ihi-yJ-jXz"/>
                                         <constraint firstItem="bds-mR-zyE" firstAttribute="top" secondItem="NaQ-zu-CkY" secondAttribute="top" id="kWu-hL-7dF"/>
+                                        <constraint firstAttribute="bottom" secondItem="Vw6-85-lM9" secondAttribute="bottom" constant="7" id="pWn-cR-jgz"/>
                                     </constraints>
                                 </collectionViewCellContentView>
                                 <color key="backgroundColor" red="0.95342243020304573" green="0.95342243020304573" blue="0.95342243020304573" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <size key="customSize" width="170" height="296"/>
                                 <connections>
+                                    <outlet property="likeButton" destination="Vw6-85-lM9" id="THM-xZ-GC0"/>
                                     <outlet property="mainImageView" destination="bds-mR-zyE" id="SmO-8m-3vz"/>
                                     <outlet property="nameLabel" destination="7tu-sP-gb3" id="iIF-YO-mna"/>
                                     <outlet property="priceLabel" destination="jef-7j-PZK" id="j85-Wd-uhv"/>
@@ -389,6 +400,7 @@
                     <navigationItem key="navigationItem" id="P0P-rj-4cV"/>
                     <connections>
                         <outlet property="idLabel" destination="Nz3-Qk-MY5" id="F6o-vq-8GN"/>
+                        <outlet property="likeButton" destination="lc3-Jf-5GT" id="5u2-rW-Ztm"/>
                         <outlet property="mainImageView" destination="jHh-6U-7Ek" id="k6k-lg-35N"/>
                         <outlet property="nameLabel" destination="aX6-62-cZY" id="zTz-gN-yUd"/>
                         <outlet property="priceLabel" destination="d7b-EV-PON" id="gxc-eN-uE8"/>

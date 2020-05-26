@@ -75,7 +75,9 @@ final class CatalogViewController: UICollectionViewController {
         
         let alert = UIAlertController(title: "You can filtered products", message: "Chose your interest category", preferredStyle: .actionSheet)
         
-        alert.addAction(UIAlertAction(title: "Все товары", style: .default, handler: nil))
+        alert.addAction(UIAlertAction(title: "Все товары", style: .default, handler: {action in
+            self.makeFilter(choice: "all")
+        }))
         alert.addAction(UIAlertAction(title: "Одежда", style: .default, handler: {action in
             self.makeFilter(choice: "clothes")
         }))

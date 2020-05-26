@@ -10,7 +10,9 @@ import UIKit
 
 final class DetailSubjectViewController: UITableViewController {
     var product = Product()
-
+    
+    @IBOutlet weak var likeButton: UIButton!
+    
     @IBOutlet weak var mainImageView: UIImageView!
     @IBOutlet weak var idLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
@@ -21,6 +23,9 @@ final class DetailSubjectViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        likeButton.addTarget(self, action: #selector(addFavouriteTapped(_:)), for: .touchUpInside)
+        likeButton.setImage(UIImage(named: "likeFull"), for: .highlighted)
         
         if product.imageData != nil {
             if let img = UIImage(data: product.imageData!) {
@@ -42,6 +47,12 @@ final class DetailSubjectViewController: UITableViewController {
 
         // Do any additional setup after loading the view.
     }
+    
+    @objc func addFavouriteTapped(_ sender: UIButton) {
+        let favouriteProduct = product.productToFavouriteProduct()
+        LocalStorageManagerFavourites.saveObject(favouriteProduct)
+    }
+    
     
 
     /*
