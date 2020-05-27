@@ -45,11 +45,14 @@ class OrdersViewController: UIViewController {
         emailLabel.text = "Ваша почта"
         phoneNumberLabel.text = "Ваш номер телефона"
         cardNumberLabel.text = "Ваш номер карты"
+        
+        updatePrice()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         tableView.reloadData()
+        updatePrice()
     }
     
     @IBAction func logoutTapped(_ sender: UIBarButtonItem) {
@@ -99,7 +102,6 @@ extension OrdersViewController: UITableViewDataSource {
         let currentProduct = filteredProducts[index]
         cell.product = currentProduct
         cell.setup()
-        updatePrice()
         
         return cell
     }
