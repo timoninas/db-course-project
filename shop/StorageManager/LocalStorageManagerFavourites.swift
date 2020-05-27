@@ -7,7 +7,6 @@
 //
 
 import Foundation
-
 import RealmSwift
 
 let realm = try! Realm()
@@ -23,8 +22,6 @@ class LocalStorageManagerFavourites {
     static func deleteObject(_ favouriteProduct: FavouriteProduct) {
         try! realm.write {
             realm.delete(favouriteProduct)
-        }
-        
+        } 
     }
-    
 }

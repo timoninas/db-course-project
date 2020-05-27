@@ -1,14 +1,14 @@
 //
-//  OrdersTableViewController.swift
+//  EditProfileTableController.swift
 //  shop
 //
-//  Created by Антон Тимонин on 29.04.2020.
+//  Created by Антон Тимонин on 27.05.2020.
 //  Copyright © 2020 Антон Тимонин. All rights reserved.
 //
 
 import UIKit
 
-class OrdersTableViewController: UITableViewController {
+class EditProfileTableController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,16 +22,26 @@ class OrdersTableViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+//    override func numberOfSections(in tableView: UITableView) -> Int {
+//        // #warning Incomplete implementation, return the number of sections
+//        return 0
+//    }
+//
+//    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        // #warning Incomplete implementation, return the number of rows
+//        return 0
+//    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+    
+    
+    
+    @IBAction func saveTapped(_ sender: UIButton) {
+        self.navigationController?.popViewController(animated: true)
     }
-
+    
     /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)

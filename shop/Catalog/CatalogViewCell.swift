@@ -21,18 +21,23 @@ final class CatalogViewCell: UICollectionViewCell {
     
     func setup() {
         if product?.imageData != nil {
-                    guard let imgData = product?.imageData, let image = UIImage(data: imgData) else { return }
-                    mainImageView.image = image
-                }
-                
-                if product?.imageURLString != nil {
-                    guard let url = URL(string: (product?.imageURLString)!) else { return }
-                    self.mainImageView.kf.setImage(with: url)
-                }
-                priceLabel.text = "\(product?.price ?? 0),00 руб."
-                nameLabel.text = "\(product?.name ?? "Nah")"
+            guard let imgData = product?.imageData, let image = UIImage(data: imgData) else { return }
+            mainImageView.image = image
+        }
+        
+        if product?.imageURLString != nil {
+            guard let url = URL(string: (product?.imageURLString)!) else { return }
+            self.mainImageView.kf.setImage(with: url)
+        }
+        priceLabel.text = "\(product?.price ?? 0),00 руб."
+        nameLabel.text = "\(product?.name ?? "Nah")"
         //        guard mainImageView.i != nil else { return }
-                mainImageView.contentMode = .scaleAspectFit
+        mainImageView.contentMode = .scaleAspectFit
+    }
+    
+    @IBAction func likeTapped(_ sender: UIButton) {
+        let favouriteProduct = product!.productToFavouriteProduct()
+        LocalStorageManagerFavourites.saveObject(favouriteProduct)
     }
     
     override func awakeFromNib() {

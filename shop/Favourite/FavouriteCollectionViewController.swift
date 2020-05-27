@@ -58,6 +58,7 @@ final class FavouriteCollectionViewController: UICollectionViewController {
         
         let filteredProduct = filteredProducts[indexPath.row]
         cell.product = filteredProduct
+        cell.backgroundColor = #colorLiteral(red: 0.9238019586, green: 0.9335535169, blue: 0.9419932961, alpha: 1)
         cell.setup()
         cell.completion = { [weak self] isDeleted in
             if isDeleted {

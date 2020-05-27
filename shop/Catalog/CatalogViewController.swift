@@ -109,15 +109,6 @@ final class CatalogViewController: UICollectionViewController {
         self.collectionView.reloadData()
     }
     
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using [segue destinationViewController].
-     // Pass the selected object to the new view controller.
-     }
-     */
     
     // MARK: UICollectionViewDataSource
     
@@ -135,7 +126,7 @@ final class CatalogViewController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "showSubject", for: indexPath) as! CatalogViewCell
         
-        cell.backgroundColor = #colorLiteral(red: 0.9219360948, green: 0.9164555669, blue: 0.9261488914, alpha: 1)
+        cell.backgroundColor = #colorLiteral(red: 0.9238019586, green: 0.9335535169, blue: 0.9419932961, alpha: 1)
 //        cell.mainImageView.image = nil
         cell.product = filteredProducts[indexPath.item]
         cell.setup()
@@ -151,6 +142,8 @@ final class CatalogViewController: UICollectionViewController {
             }
         }
     }
+    
+    
 }
 
 extension CatalogViewController: UICollectionViewDelegateFlowLayout {
