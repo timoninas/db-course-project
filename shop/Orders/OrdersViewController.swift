@@ -9,8 +9,16 @@
 import UIKit
 import Firebase
 import RealmSwift
+import FirebaseFirestore
 
 class OrdersViewController: UIViewController {
+    
+    // MARK:-AdminButton
+    @IBOutlet weak var adminButton: UIBarButtonItem!
+    var _isAdmin = false
+    var isAdmin: Bool {
+        return _isAdmin
+    }
     
     // MARK:-Realm DataBase
     private var filteredProducts: Results<OrderProduct>!
@@ -29,8 +37,19 @@ class OrdersViewController: UIViewController {
     private var _totalPrice = 0
     @IBOutlet weak var totalPriceLabel: UILabel!
     
+    // MARK:-Profile
+    private var profile = Profile()
+    
+    // MARK:-Firebase handler
+    private var requestsCollectionRef: CollectionReference!
+    
+    // erhgknejr@mail.ru
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        
+//        adminButton.hidden = true
         
         filteredProducts = realm.objects(OrderProduct.self)
 //
@@ -44,12 +63,20 @@ class OrdersViewController: UIViewController {
         cardNumberLabel.text = "Ваш номер карты"
         
         updatePrice()
+        setupEmail()
+        
+        requestsCollectionRef = Firestore.firestore().collection("users-info")
+        
+        if !isAdmin {
+            self.navigationItem.leftBarButtonItem = nil
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         tableView.reloadData()
         updatePrice()
+        downloadProfile()
     }
     
     @IBAction func logoutTapped(_ sender: UIBarButtonItem) {
@@ -77,6 +104,56 @@ class OrdersViewController: UIViewController {
             totalPriceLabel.text = "Итоговая цена: \(_totalPrice) руб."
         }
     }
+    
+    func setupEmail() {
+        Auth.auth().addStateDidChangeListener { [weak self](auth, user) in
+            if self?.emailLabel.text != nil {
+                self?.emailLabel.text = user?.email
+            }
+        }
+    }
+    
+    func downloadProfile() {
+        requestsCollectionRef.getDocuments { [weak self] (snapshot, error) in
+            //            guard error != nil else { return }
+            guard let snap = snapshot else { return }
+            
+            for user in snap.documents {
+                let data = user.data()
+                
+                let email = user.documentID
+                let name = data["name"] as? String ?? "Ваше имя"
+                let family = data["family"] as? String ?? "Ваша фамилия"
+                let cardNumber = data["cardnumber"] as? String ?? "Ваш номер карты"
+                let phone = data["phone"] as? String ?? "Ваш номер телефона"
+                
+                if email == self?.emailLabel.text {
+                    self?.profile.cardNumber = cardNumber
+                    self?.profile.name = name
+                    self?.profile.family = family
+                    self?.profile.phone = phone
+                    
+                    self?.setupProfile()
+                    break
+                }
+            }
+        }
+    }
+    
+    func setupProfile() {
+        self.nameLabel.text = profile.name
+        self.familyLabel.text = profile.family
+        self.phoneNumberLabel.text = profile.phone
+        self.cardNumberLabel.text = profile.cardNumber
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "editUserInfo" {
+            let editProfileVC = segue.destination as! EditProfileTableController
+            editProfileVC.profile = profile
+            editProfileVC.email = self.emailLabel.text!
+        }
+    }
 
 }
 
@@ -99,6 +176,7 @@ extension OrdersViewController: UITableViewDelegate {
             LocalStorageManagerOrders.deleteObject(product)
             tableView.deleteRows(at: [indexPath], with: .automatic)
             self.updatePrice()
+            
         }
         
         return UISwipeActionsConfiguration(actions: [deleteAction])

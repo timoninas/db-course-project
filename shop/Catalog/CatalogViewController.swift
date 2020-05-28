@@ -16,13 +16,20 @@ final class CatalogViewController: UICollectionViewController {
     var products = [Product]()
     var filteredProducts = [Product]()
     
+    @IBOutlet weak var sortNavButton: UIBarButtonItem!
+    private var _isSorted = false
+    public var isSorted: Bool {
+        return _isSorted
+    }
+    
     var ref:DatabaseReference?
     var databaseHandle: DatabaseHandle?
     private var requestsCollectionRef: CollectionReference!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        let tmpImage = resizeImage(image: #imageLiteral(resourceName: "down"), targetSize: CGSize(width: 21, height: 21))
+        sortNavButton.image = tmpImage
         
         requestsCollectionRef = Firestore.firestore().collection("catalog-products")
         
@@ -61,6 +68,7 @@ final class CatalogViewController: UICollectionViewController {
                     self?.filteredProducts.append(newProduct)
                     
                 }
+                self?.makeFilterByPrice()
                 self?.collectionView.reloadData()
             }
         }
@@ -71,28 +79,60 @@ final class CatalogViewController: UICollectionViewController {
         
     }
     
+    func resizeImage(image: UIImage, targetSize: CGSize) -> UIImage {
+        let size = image.size
+
+        let widthRatio  = targetSize.width  / size.width
+        let heightRatio = targetSize.height / size.height
+
+        // Figure out what our orientation is, and use that to form the rectangle
+        var newSize: CGSize
+        if(widthRatio > heightRatio) {
+            newSize = CGSize(width: size.width * heightRatio, height: size.height * heightRatio)
+        } else {
+            newSize = CGSize(width: size.width * widthRatio,  height: size.height * widthRatio)
+        }
+
+        // This is the rect that we've calculated out and this is what is actually used below
+        let rect = CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height)
+
+        // Actually do the resizing to the rect using the ImageContext stuff
+        UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
+        image.draw(in: rect)
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+
+        return newImage!
+    }
+    
     @IBAction func filterButtonTapped(_ sender: UIBarButtonItem) {
         
         let alert = UIAlertController(title: "You can filtered products", message: "Chose your interest category", preferredStyle: .actionSheet)
         
         alert.addAction(UIAlertAction(title: "Все товары", style: .default, handler: {action in
-            self.makeFilter(choice: "all")
+            self.makeFilterByType(choice: "all")
         }))
         alert.addAction(UIAlertAction(title: "Одежда", style: .default, handler: {action in
-            self.makeFilter(choice: "clothes")
+            self.makeFilterByType(choice: "clothes")
         }))
         alert.addAction(UIAlertAction(title: "Обувь", style: .default, handler: {action in
-            self.makeFilter(choice: "shoes")
+            self.makeFilterByType(choice: "shoes")
         }))
         alert.addAction(UIAlertAction(title: "Аксессуары", style: .default, handler: {action in
-            self.makeFilter(choice: "accessories")
+            self.makeFilterByType(choice: "accessories")
         }))
         alert.addAction(UIAlertAction(title: "Отмена", style: .cancel))
         self.present(alert, animated: true)
         
     }
     
-    func makeFilter(choice: String) {
+    @IBAction func sortButtonTapped(_ sender: UIBarButtonItem) {
+        makeFilterByPrice()
+        collectionView.reloadData()
+    }
+    
+    
+    func makeFilterByType(choice: String) {
         self.filteredProducts.removeAll()
         if choice == "all" {
             filteredProducts = products.filter({ (product) -> Bool in
@@ -106,7 +146,35 @@ final class CatalogViewController: UICollectionViewController {
                 return false
             })
         }
+        makeFilterByPrice()
         self.collectionView.reloadData()
+    }
+    
+    func makeFilterByPrice() {
+        if isSorted {
+            let tmpImage = resizeImage(image: #imageLiteral(resourceName: "down"), targetSize: CGSize(width: 21, height: 21))
+            sortNavButton.image = tmpImage
+            _isSorted = false
+            
+            filteredProducts.sort { (product1, product2) -> Bool in
+                if product1.price >= product2.price {
+                    return true
+                }
+                return false
+            }
+        } else {
+            let tmpImage = resizeImage(image: #imageLiteral(resourceName: "up"), targetSize: CGSize(width: 21, height: 21))
+            
+            sortNavButton.image = tmpImage
+            _isSorted = true
+            
+            filteredProducts.sort { (product1, product2) -> Bool in
+                if product1.price < product2.price {
+                    return true
+                }
+                return false
+            }
+        }
     }
     
     

@@ -7,17 +7,38 @@
 //
 
 import UIKit
+import FirebaseFirestore
 
 class EditProfileTableController: UITableViewController {
-
+    
+    var profile = Profile()
+    var email: String = ""
+    
+    @IBOutlet weak var nameTextField: UITextField!
+    @IBOutlet weak var familyTextField: UITextField!
+    @IBOutlet weak var phoneNumberTextField: UITextField!
+    @IBOutlet weak var cardNumberTextField: UITextField!
+    
+    private var requestsCollectionRef: CollectionReference!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        
+        requestsCollectionRef = Firestore.firestore().collection("users-info")
+        
+        let data = UIImage(named: "zx1")?.pngData()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        setupTextFields()
+    }
+    
+    func setupTextFields() {
+        nameTextField.text = profile.name
+        familyTextField.text = profile.family
+        phoneNumberTextField.text = profile.phone
+        cardNumberTextField.text = profile.cardNumber
     }
 
     // MARK: - Table view data source
@@ -39,6 +60,15 @@ class EditProfileTableController: UITableViewController {
     
     
     @IBAction func saveTapped(_ sender: UIButton) {
+        let name = nameTextField.text
+        let family = familyTextField.text
+        let phoneNumber = phoneNumberTextField.text
+        let cardNumber = cardNumberTextField.text
+        requestsCollectionRef.document(email).setData(["name":name,
+                                                       "family":family,
+                                                       "phone":phoneNumber,
+                                                       "cardnumber":cardNumber])
+        
         self.navigationController?.popViewController(animated: true)
     }
     

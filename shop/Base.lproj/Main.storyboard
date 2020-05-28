@@ -239,12 +239,20 @@
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" title="Каталог" id="maj-Fw-2Jg">
+                        <barButtonItem key="leftBarButtonItem" title="Item" id="gJB-0q-PDa">
+                            <connections>
+                                <action selector="sortButtonTapped:" destination="wb7-9l-CTY" id="Vqt-ie-ncE"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Filter" id="Ljv-kC-h4S">
                             <connections>
                                 <action selector="filterButtonTapped:" destination="wb7-9l-CTY" id="eUV-0z-Dq4"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="sortNavButton" destination="gJB-0q-PDa" id="g2q-ww-wSc"/>
+                    </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mv6-Nk-JH7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -605,8 +613,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="vIH-wf-r2H">
-                                <rect key="frame" x="16" y="98.999999999999986" width="343" height="161.66666666666663"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="vIH-wf-r2H">
+                                <rect key="frame" x="16" y="98.999999999999986" width="343" height="173.66666666666663"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Имя" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KDg-65-zYB">
                                         <rect key="frame" x="0.0" y="0.0" width="343" height="20.333333333333332"/>
@@ -615,25 +623,25 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Фамилия" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AVp-t6-bms">
-                                        <rect key="frame" x="0.0" y="35.333333333333343" width="343" height="20.333333333333329"/>
+                                        <rect key="frame" x="0.0" y="38.333333333333343" width="343" height="20.333333333333329"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Почта" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ApC-PS-bWJ">
-                                        <rect key="frame" x="0.0" y="70.666666666666657" width="343" height="20.333333333333329"/>
+                                        <rect key="frame" x="0.0" y="76.666666666666657" width="343" height="20.333333333333329"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Телефон" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tmm-PF-piY">
-                                        <rect key="frame" x="0.0" y="106" width="343" height="20.333333333333329"/>
+                                        <rect key="frame" x="0.0" y="115" width="343" height="20.333333333333343"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Номер карты" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kdH-1h-v3n">
-                                        <rect key="frame" x="0.0" y="141.33333333333334" width="343" height="20.333333333333343"/>
+                                        <rect key="frame" x="0.0" y="153.33333333333334" width="343" height="20.333333333333343"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -660,7 +668,7 @@
                                 </subviews>
                             </stackView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="qsg-3X-mhj">
-                                <rect key="frame" x="0.0" y="270.66666666666674" width="375" height="408.33333333333326"/>
+                                <rect key="frame" x="0.0" y="282.66666666666674" width="375" height="396.33333333333326"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cellBasket" rowHeight="80" id="Jew-Oc-yla" customClass="ProductOrderCell" customModule="shop" customModuleProvider="target">
@@ -740,10 +748,15 @@
                         <viewLayoutGuide key="safeArea" id="eVL-tm-hsC"/>
                     </view>
                     <navigationItem key="navigationItem" id="6pE-mS-7xi">
+                        <barButtonItem key="leftBarButtonItem" systemItem="play" id="tY5-zO-YS6">
+                            <connections>
+                                <segue destination="lw4-e7-lPZ" kind="push" id="TuY-Zd-Ghb"/>
+                            </connections>
+                        </barButtonItem>
                         <rightBarButtonItems>
                             <barButtonItem title="Редактировать" id="9e5-0b-WaM">
                                 <connections>
-                                    <segue destination="7BP-DF-fPF" kind="show" id="P6U-aY-azB"/>
+                                    <segue destination="7BP-DF-fPF" kind="show" identifier="editUserInfo" id="P6U-aY-azB"/>
                                 </connections>
                             </barButtonItem>
                             <barButtonItem title="Выйти" id="sEn-hf-9Uc">
@@ -754,6 +767,7 @@
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
+                        <outlet property="adminButton" destination="tY5-zO-YS6" id="Y3V-i8-XXJ"/>
                         <outlet property="cardNumberLabel" destination="kdH-1h-v3n" id="0nN-PL-gnE"/>
                         <outlet property="emailLabel" destination="ApC-PS-bWJ" id="yYe-Fj-cKW"/>
                         <outlet property="familyLabel" destination="AVp-t6-bms" id="SKS-Zb-UO4"/>
@@ -895,10 +909,41 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Редактирование профиля" id="wtR-9l-tKg"/>
+                    <connections>
+                        <outlet property="cardNumberTextField" destination="1nf-wd-uyX" id="4yK-gM-1am"/>
+                        <outlet property="familyTextField" destination="XAU-9N-U2z" id="03M-k8-dxW"/>
+                        <outlet property="nameTextField" destination="PaV-mm-j0S" id="soe-kG-ye6"/>
+                        <outlet property="phoneNumberTextField" destination="Atk-y9-6qt" id="Iri-zk-QAy"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oMr-74-BBS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2789.5999999999999" y="51.724137931034484"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="qUC-sc-499">
+            <objects>
+                <viewController id="lw4-e7-lPZ" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Icu-r6-aAj">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Admin" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yIM-Qf-HdX">
+                                <rect key="frame" x="166" y="318" width="49" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="khq-Z9-rla"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Jra-Kh-0ph"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aAd-dC-lTp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3593" y="50"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="u7P-wE-SNv">
