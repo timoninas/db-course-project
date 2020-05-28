@@ -43,4 +43,12 @@ final class FavouriteViewCell: UICollectionViewCell {
         completion?(true)
         LocalStorageManagerFavourites.deleteObject(product!)
     }
+    
+    @IBAction func addOrderTapped(_ sender: UIButton) {
+        let adapter = ProductAdapter()
+        let orderProduct = adapter.favouriteToOrderProduct(product!)
+        
+        LocalStorageManagerOrders.saveObject(orderProduct)
+    }
+    
 }

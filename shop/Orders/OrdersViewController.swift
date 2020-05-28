@@ -29,14 +29,11 @@ class OrdersViewController: UIViewController {
     private var _totalPrice = 0
     @IBOutlet weak var totalPriceLabel: UILabel!
     
-    // MARK: Orders Array
-    let orders = ["Kek", "Lol", "Arbidol", "Arbidol", "Arbidol", "Arbidol", "Arbidol", "Arbidol", "Arbidol"]
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         filteredProducts = realm.objects(OrderProduct.self)
-        
+//
         self.tableView.dataSource = self
         tableView.delegate = self
         
@@ -73,7 +70,12 @@ class OrdersViewController: UIViewController {
         for product in filteredProducts {
             _totalPrice += product.price
         }
-        totalPriceLabel.text = "Итоговая цена: \(_totalPrice) руб."
+        
+        if _totalPrice == 0 {
+            totalPriceLabel.text = "Корзина пуста"
+        } else {
+            totalPriceLabel.text = "Итоговая цена: \(_totalPrice) руб."
+        }
     }
 
 }
@@ -86,6 +88,20 @@ extension OrdersViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        let product = filteredProducts[indexPath.row]
+        
+        let deleteAction = UIContextualAction(style: .destructive, title: "Удалить") { (_, _, _) in
+
+            LocalStorageManagerOrders.deleteObject(product)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+            self.updatePrice()
+        }
+        
+        return UISwipeActionsConfiguration(actions: [deleteAction])
     }
     
 }

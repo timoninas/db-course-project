@@ -36,9 +36,19 @@ final class CatalogViewCell: UICollectionViewCell {
     }
     
     @IBAction func likeTapped(_ sender: UIButton) {
-        let favouriteProduct = product!.productToFavouriteProduct()
+        let adapter = ProductAdapter()
+        let favouriteProduct = adapter.productToFavouriteProduct(product!)
+        
         LocalStorageManagerFavourites.saveObject(favouriteProduct)
     }
+    
+    @IBAction func orderTapped(_ sender: UIButton) {
+        let adapter = ProductAdapter()
+        let orderProduct = adapter.productToOrderProduct(product!)
+        
+        LocalStorageManagerOrders.saveObject(orderProduct)
+    }
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()

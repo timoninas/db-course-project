@@ -49,11 +49,17 @@ final class DetailSubjectViewController: UITableViewController {
     }
     
     @objc func addFavouriteTapped(_ sender: UIButton) {
-        let favouriteProduct = product.productToFavouriteProduct()
+        let adapter = ProductAdapter()
+        let favouriteProduct = adapter.productToFavouriteProduct(product)
         LocalStorageManagerFavourites.saveObject(favouriteProduct)
     }
     
-    
+    @IBAction func addOrderTapped(_ sender: UIButton) {
+        let adapter = ProductAdapter()
+        let orderProduct = adapter.productToOrderProduct(product)
+        
+        LocalStorageManagerOrders.saveObject(orderProduct)
+    }
 
     /*
     // MARK: - Navigation

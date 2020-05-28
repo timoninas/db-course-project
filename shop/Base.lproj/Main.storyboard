@@ -65,6 +65,9 @@
                                                     </constraints>
                                                     <state key="normal" image="inBasket"/>
                                                     <state key="highlighted" image="inBasketInvert"/>
+                                                    <connections>
+                                                        <action selector="addOrderTapped:" destination="ktI-Rs-qd3" eventType="touchUpInside" id="G1R-RX-Wvx"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vw6-85-lM9">
                                                     <rect key="frame" x="78" y="0.0" width="33" height="33"/>
@@ -73,6 +76,7 @@
                                                         <constraint firstAttribute="width" constant="33" id="Y0q-jZ-TXW"/>
                                                     </constraints>
                                                     <state key="normal" image="barLikeFull"/>
+                                                    <state key="highlighted" image="barLike"/>
                                                 </button>
                                             </subviews>
                                         </stackView>
@@ -189,6 +193,9 @@
                                                     </constraints>
                                                     <state key="normal" image="inBasket"/>
                                                     <state key="highlighted" image="inBasketInvert"/>
+                                                    <connections>
+                                                        <action selector="orderTapped:" destination="uku-oi-75q" eventType="touchUpInside" id="kfQ-C9-5A5"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SBV-sf-zsa">
                                                     <rect key="frame" x="78" y="0.0" width="33" height="33"/>
@@ -419,6 +426,9 @@
                                                             <rect key="frame" x="0.0" y="0.0" width="85.333333333333329" height="85"/>
                                                             <state key="normal" image="inBasket"/>
                                                             <state key="highlighted" image="inBasketInvert"/>
+                                                            <connections>
+                                                                <action selector="addOrderTapped:" destination="WGU-C9-MGH" eventType="touchUpInside" id="Ev0-CE-IsF"/>
+                                                            </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lc3-Jf-5GT">
                                                             <rect key="frame" x="187.33333333333334" y="0.0" width="85.666666666666657" height="85"/>
@@ -650,7 +660,7 @@
                                 </subviews>
                             </stackView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="qsg-3X-mhj">
-                                <rect key="frame" x="0.0" y="265.66666666666674" width="375" height="413.33333333333326"/>
+                                <rect key="frame" x="0.0" y="270.66666666666674" width="375" height="408.33333333333326"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cellBasket" rowHeight="80" id="Jew-Oc-yla" customClass="ProductOrderCell" customModule="shop" customModuleProvider="target">
@@ -721,7 +731,7 @@
                             <constraint firstItem="qsg-3X-mhj" firstAttribute="trailing" secondItem="eVL-tm-hsC" secondAttribute="trailing" id="Qel-V0-mP8"/>
                             <constraint firstItem="qsg-3X-mhj" firstAttribute="leading" secondItem="eVL-tm-hsC" secondAttribute="leading" id="bCS-8l-jYm"/>
                             <constraint firstItem="3nq-pz-wj0" firstAttribute="leading" secondItem="eVL-tm-hsC" secondAttribute="leading" constant="15" id="cEu-T0-8I7"/>
-                            <constraint firstItem="qsg-3X-mhj" firstAttribute="top" secondItem="vIH-wf-r2H" secondAttribute="bottom" constant="5" id="ndB-hx-QFz"/>
+                            <constraint firstItem="qsg-3X-mhj" firstAttribute="top" secondItem="vIH-wf-r2H" secondAttribute="bottom" constant="10" id="ndB-hx-QFz"/>
                             <constraint firstItem="eVL-tm-hsC" firstAttribute="trailing" secondItem="vIH-wf-r2H" secondAttribute="trailing" constant="16" id="oMM-Zb-Fg6"/>
                             <constraint firstItem="qsg-3X-mhj" firstAttribute="trailing" secondItem="eVL-tm-hsC" secondAttribute="trailing" id="oW0-JG-dZ9"/>
                             <constraint firstItem="qsg-3X-mhj" firstAttribute="leading" secondItem="eVL-tm-hsC" secondAttribute="leading" id="q66-L5-p8T"/>
