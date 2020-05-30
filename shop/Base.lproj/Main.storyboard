@@ -748,7 +748,7 @@
                         <viewLayoutGuide key="safeArea" id="eVL-tm-hsC"/>
                     </view>
                     <navigationItem key="navigationItem" id="6pE-mS-7xi">
-                        <barButtonItem key="leftBarButtonItem" systemItem="play" id="tY5-zO-YS6">
+                        <barButtonItem key="leftBarButtonItem" title="Admin" id="tY5-zO-YS6">
                             <connections>
                                 <segue destination="lw4-e7-lPZ" kind="push" id="TuY-Zd-Ghb"/>
                             </connections>
@@ -762,6 +762,11 @@
                             <barButtonItem title="Выйти" id="sEn-hf-9Uc">
                                 <connections>
                                     <action selector="logoutTapped:" destination="ksb-JQ-tfQ" id="yYt-OL-Xzg"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Промокод" id="n5b-Hd-clY">
+                                <connections>
+                                    <action selector="promocodeTapped:" destination="ksb-JQ-tfQ" id="f3k-dz-eO1"/>
                                 </connections>
                             </barButtonItem>
                         </rightBarButtonItems>

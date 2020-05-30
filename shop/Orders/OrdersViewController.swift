@@ -13,9 +13,11 @@ import FirebaseFirestore
 
 class OrdersViewController: UIViewController {
     
+    
+    
     // MARK:-AdminButton
     @IBOutlet weak var adminButton: UIBarButtonItem!
-    var _isAdmin = false
+    var _isAdmin = true
     var isAdmin: Bool {
         return _isAdmin
     }
@@ -43,11 +45,13 @@ class OrdersViewController: UIViewController {
     // MARK:-Firebase handler
     private var requestsCollectionRef: CollectionReference!
     
+    // MARK:-Promocode
+    private var _promocode: String = ""
+    private let promocodeService = PromocodeService()
+    
     // erhgknejr@mail.ru
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
         
 //        adminButton.hidden = true
         
@@ -88,9 +92,23 @@ class OrdersViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
+    @IBAction func promocodeTapped(_ sender: UIBarButtonItem) {
+        presentAlertWithTextField()
+    }
     
     @IBAction func buyTapped(_ sender: UIButton) {
+        let fromOrder = FormOrderService(profile: profile,
+                                         products: filteredProducts,
+                                         discount: promocodeService.checkPromocode(promocode: _promocode))
+        fromOrder.makePersonalOrder()
+        for product in filteredProducts {
+            LocalStorageManagerOrders.deleteObject(product)
+        }
+        self.tableView.reloadData()
+        updatePrice()
     }
+    
+    
     
     func updatePrice() {
         _totalPrice = 0
@@ -101,8 +119,18 @@ class OrdersViewController: UIViewController {
         if _totalPrice == 0 {
             totalPriceLabel.text = "Корзина пуста"
         } else {
+            if _promocode != "" {
+                let value = promocodeService.checkPromocode(promocode: _promocode)
+                let difference: Double = Double((_totalPrice * value) / 100)
+                _totalPrice = _totalPrice - Int(difference)
+            }
             totalPriceLabel.text = "Итоговая цена: \(_totalPrice) руб."
         }
+        
+    }
+    
+    func applyPromocode() {
+        
     }
     
     func setupEmail() {
@@ -155,6 +183,26 @@ class OrdersViewController: UIViewController {
         }
     }
 
+    func presentAlertWithTextField() {
+        
+        let alertController = UIAlertController(title: "Введите промокод", message: "", preferredStyle: .alert)
+        alertController.addTextField { textField in
+            textField.placeholder = "Промокод"
+        }
+        let confirmAction = UIAlertAction(title: "OK", style: .default) { [weak alertController] _ in
+            guard let alertController = alertController, let textField = alertController.textFields?.first else { return }
+            
+            self._promocode = textField.text ?? ""
+            self.updatePrice()
+            //compare the current password and do action here
+        }
+        alertController.addAction(confirmAction)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alertController.addAction(cancelAction)
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    
 }
 
 extension OrdersViewController: UITableViewDelegate {

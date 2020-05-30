@@ -20,14 +20,36 @@ class EditProfileTableController: UITableViewController {
     @IBOutlet weak var cardNumberTextField: UITextField!
     
     private var requestsCollectionRef: CollectionReference!
+    private var test: CollectionReference!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         requestsCollectionRef = Firestore.firestore().collection("users-info")
-        
-        let data = UIImage(named: "zx1")?.pngData()
+        test = Firestore.firestore().collection("user-orders")
     }
+    
+//    func kek() {
+//
+//        test.getDocuments { (snapshot, error) in
+//            guard error == nil else { return }
+//            guard let snap = snapshot else { return }
+//
+//            for product in snap.documents {
+//                let data = product.data()
+//                //let docID = product.documentID
+//
+//                let name = data["name"] as? String ?? ""
+//                let family = data["family"] as? String ?? ""
+//                let cardnumber = data["cardnumber"] as? String ?? ""
+//                let products = data["productsID"] as? [Int]
+//                let phone = data["phone"] as? String ?? ""
+//
+//
+//                let kek = 0
+//            }
+//        }
+//    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
