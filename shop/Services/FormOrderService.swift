@@ -10,13 +10,15 @@ import Foundation
 import RealmSwift
 import FirebaseFirestore
 
-class FormOrderService {
+final class FormOrderService {
+    // MARK: Private variables
     private var price: Int = 0
     private var discount: Int = 0
     private let profile: Profile
     private let products: Results<OrderProduct>
     private var requestsCollectionRef: CollectionReference!
     
+    // MARK: Inits
     init(profile: Profile, products: Results<OrderProduct>, discount: Int) {
         self.profile = profile
         self.products = products
@@ -24,6 +26,19 @@ class FormOrderService {
         requestsCollectionRef = Firestore.firestore().collection("user-orders")
     }
     
+    // MARK: Private functions
+    private func sendOrder(sender: Order) {
+        requestsCollectionRef.addDocument(data: ["name":sender.name,
+                                                 "family":sender.family,
+                                                 "cardnumber":sender.cardNumber,
+                                                 "phone":sender.phone,
+                                                 "productsID":sender.productsID,
+                                                 "discount":sender.discount,
+                                                 "price":price,
+                                                 "isCompleted": false])
+    }
+    
+    // MARK: Public functions
     func makePersonalOrder() {
         var productsID = [Int]()
         
@@ -43,16 +58,5 @@ class FormOrderService {
                           discount: discount)
         
         sendOrder(sender: order)
-    }
-    
-    private func sendOrder(sender: Order) {
-        requestsCollectionRef.addDocument(data: ["name":sender.name,
-                                                 "family":sender.family,
-                                                 "cardnumber":sender.cardNumber,
-                                                 "phone":sender.phone,
-                                                 "productsID":sender.productsID,
-                                                 "discount":sender.discount,
-                                                 "price":price,
-                                                 "isCompleted": false])
     }
 }

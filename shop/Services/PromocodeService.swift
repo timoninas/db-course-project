@@ -8,10 +8,13 @@
 
 import Foundation
 import FirebaseFirestore
-class PromocodeService {
+
+final class PromocodeService {
+    // MARK: Private variables
     private var promocodes = [String:Int]()
     private var requestsCollectionRef: CollectionReference!
     
+    // MARK: Inits
     required init() {
         requestsCollectionRef = Firestore.firestore().collection("promocodes")
         
@@ -28,6 +31,7 @@ class PromocodeService {
         }
     }
     
+    // MARK: Public functions
     func checkPromocode(promocode: String) -> Int{
         return promocodes[promocode] ?? 0
     }
