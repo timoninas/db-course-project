@@ -49,7 +49,6 @@ final class CatalogViewCell: UICollectionViewCell {
         LocalStorageManagerOrders.saveObject(orderProduct)
     }
     
-    
     override func awakeFromNib() {
         super.awakeFromNib()
     }

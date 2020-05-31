@@ -9,21 +9,28 @@
 import UIKit
 
 final class FavouriteViewCell: UICollectionViewCell {
-    var product: FavouriteProduct? = FavouriteProduct()
-    
+    // MARK:-Public variables
+    public var product: FavouriteProduct? = FavouriteProduct()
     public var completion: ((Bool) -> ())?
     
+    // MARK:-IBOutlets
     @IBOutlet weak var likeButton: UIButton!
-    
     @IBOutlet weak var mainImageView: UIImageView!
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
     
+    // MARK:-Did Move To Window
     override func didMoveToWindow() {
         likeButton.setImage(UIImage(named: "like"), for: .highlighted)
         likeButton.addTarget(self, action: #selector(deleteFromFavourite(_:)), for: .touchUpInside)
     }
     
+    // MARK:- Awake From Nib
+    override func awakeFromNib() {
+        super.awakeFromNib()
+    }
+    
+    // MARK:-Public functions
     func setup() {
         if product?.imageData != nil {
             guard let imgData = product?.imageData, let image = UIImage(data: imgData) else { return }
@@ -35,15 +42,14 @@ final class FavouriteViewCell: UICollectionViewCell {
         mainImageView.contentMode = .scaleAspectFit
     }
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
     
-    @objc func deleteFromFavourite(_ sender: UIButton) {
+    
+    @objc private func deleteFromFavourite(_ sender: UIButton) {
         completion?(true)
         LocalStorageManagerFavourites.deleteObject(product!)
     }
     
+    // MARK:- IBActions
     @IBAction func addOrderTapped(_ sender: UIButton) {
         let adapter = ProductAdapter()
         let orderProduct = adapter.favouriteToOrderProduct(product!)

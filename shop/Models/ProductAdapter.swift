@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ProductAdapter {
+final class ProductAdapter {
     
     func productToFavouriteProduct(_ product: Product) -> FavouriteProduct {
         let favouriteProduct = FavouriteProduct()

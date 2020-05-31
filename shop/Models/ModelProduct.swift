@@ -19,13 +19,6 @@ struct Product {
     var imageData: Data?
     var imageURLString: String?
     
-//    price
-//    weight
-//    dlina
-//    shirina
-//    name tovar
-//    picture
-    
     init() {
         self.type = ""
         self.id = 0
@@ -37,7 +30,6 @@ struct Product {
         self.imageData = nil
     }
     
-    
     init(id: Int, price: Int, type: String, weight: Int, length: Int, width: Int, name: String, imageData: Data) {
         self.type = type
         self.id = id
@@ -48,8 +40,6 @@ struct Product {
         self.name = name
         self.imageData = imageData
     }
-    
-    
     
     init(id: Int, price: Int, type: String, weight: Int, length: Int, width: Int, name: String, imageURLString: String) {
         

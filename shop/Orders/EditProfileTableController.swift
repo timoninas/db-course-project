@@ -9,19 +9,22 @@
 import UIKit
 import FirebaseFirestore
 
-class EditProfileTableController: UITableViewController {
+final class EditProfileTableController: UITableViewController {
+    // MARK:- Private variables
+    private var requestsCollectionRef: CollectionReference!
+    private var test: CollectionReference!
     
-    var profile = Profile()
-    var email: String = ""
+    // MARK:- Public variables
+    public var profile = Profile()
+    public var email: String = ""
     
+    //MARK:- IBOutlets
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var familyTextField: UITextField!
     @IBOutlet weak var phoneNumberTextField: UITextField!
     @IBOutlet weak var cardNumberTextField: UITextField!
     
-    private var requestsCollectionRef: CollectionReference!
-    private var test: CollectionReference!
-    
+    //MARK:- View Did Load
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -29,58 +32,13 @@ class EditProfileTableController: UITableViewController {
         test = Firestore.firestore().collection("user-orders")
     }
     
-//    func kek() {
-//
-//        test.getDocuments { (snapshot, error) in
-//            guard error == nil else { return }
-//            guard let snap = snapshot else { return }
-//
-//            for product in snap.documents {
-//                let data = product.data()
-//                //let docID = product.documentID
-//
-//                let name = data["name"] as? String ?? ""
-//                let family = data["family"] as? String ?? ""
-//                let cardnumber = data["cardnumber"] as? String ?? ""
-//                let products = data["productsID"] as? [Int]
-//                let phone = data["phone"] as? String ?? ""
-//
-//
-//                let kek = 0
-//            }
-//        }
-//    }
-    
+    // MARK:- View Will Appear
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         setupTextFields()
     }
     
-    func setupTextFields() {
-        nameTextField.text = profile.name
-        familyTextField.text = profile.family
-        phoneNumberTextField.text = profile.phone
-        cardNumberTextField.text = profile.cardNumber
-    }
-
-    // MARK: - Table view data source
-
-//    override func numberOfSections(in tableView: UITableView) -> Int {
-//        // #warning Incomplete implementation, return the number of sections
-//        return 0
-//    }
-//
-//    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        // #warning Incomplete implementation, return the number of rows
-//        return 0
-//    }
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-    }
-    
-    
-    
+    // MARK:- IBActions
     @IBAction func saveTapped(_ sender: UIButton) {
         let name = nameTextField.text
         let family = familyTextField.text
@@ -94,26 +52,19 @@ class EditProfileTableController: UITableViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
-    /*
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
-        return cell
+    // MARK:- Public methods
+    public func setupTextFields() {
+        nameTextField.text = profile.name
+        familyTextField.text = profile.family
+        phoneNumberTextField.text = profile.phone
+        cardNumberTextField.text = profile.cardNumber
     }
-    */
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+    
+    // MARK:- Delegate
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
-    */
-
-    /*
-    // Override to support editing the table view.
+    
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
@@ -122,31 +73,4 @@ class EditProfileTableController: UITableViewController {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
     }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

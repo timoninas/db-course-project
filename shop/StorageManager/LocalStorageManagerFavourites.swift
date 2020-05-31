@@ -11,14 +11,16 @@ import RealmSwift
 
 let realm = try! Realm()
 
-class LocalStorageManagerFavourites {
+final class LocalStorageManagerFavourites {
     
+    // MARK:- Save object in Realm
     static func saveObject(_ favouriteProduct: FavouriteProduct) {
         try! realm.write {
             realm.add(favouriteProduct)
         }
     }
     
+    // MARK:- Delete object from Realm
     static func deleteObject(_ favouriteProduct: FavouriteProduct) {
         try! realm.write {
             realm.delete(favouriteProduct)

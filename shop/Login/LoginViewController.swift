@@ -11,15 +11,18 @@ import Firebase
 
 final class LoginViewController: UIViewController {
     
-    let segueIdentifier: String = "loginSegue"
+    //MARK:- Private variables
+    private let segueIdentifier: String = "loginSegue"
     
+    //MARK:- IBOutlets
     @IBOutlet weak var warningLabel: UILabel!
     @IBOutlet weak var loginTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     
+    // MARK:- View Did Load
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         NotificationCenter.default.addObserver(self, selector: #selector(keyBoardDidHide), name: UIResponder.keyboardDidHideNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyBoardDidShow), name: UIResponder.keyboardDidShowNotification, object: nil)
         
@@ -32,6 +35,7 @@ final class LoginViewController: UIViewController {
         }
     }
     
+    //MARK:- View Will Appear
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -40,38 +44,16 @@ final class LoginViewController: UIViewController {
         self.passwordTextField.text = ""
     }
     
-    @objc func keyBoardDidHide(notification: Notification) {
-        guard let userInfo = notification.userInfo else { return }
-        let keyBoardFrameSize = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
-        
-        (self.view as! UIScrollView).contentSize = CGSize(width: self.view.bounds.size.width, height: self.view.bounds.size.height + keyBoardFrameSize.height)
-        
-        (self.view as! UIScrollView).scrollIndicatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyBoardFrameSize.height, right: 0)
-    }
-    
-    @objc func keyBoardDidShow(notification: Notification) {
-        (self.view as! UIScrollView).contentSize = CGSize(width: self.view.bounds.size.width, height: self.view.bounds.size.height)
-    }
-    
-    func displayWarningLabel(withText: String) {
-        warningLabel.text = withText
-        
-        UIView.animate(withDuration: 3, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseInOut, animations: { [weak self] in
-            self?.warningLabel.alpha = 1
-        }) { [weak self] complete in
-            self?.warningLabel.alpha = 0
-        }
-    }
-    
+    // MARK:- IBActions
     @IBAction func loginTapped(_ sender: UIButton) {
         guard
             let email = loginTextField.text,
             let password = passwordTextField.text,
             email != "",
             password != ""
-        else {
-            displayWarningLabel(withText: "Информация о пользователе некорректна")
-            return
+            else {
+                displayWarningLabel(withText: "Информация о пользователе некорректна")
+                return
         }
         
         Auth.auth().signIn(withEmail: email, password: password) { [weak self] (user, error) in
@@ -94,9 +76,9 @@ final class LoginViewController: UIViewController {
             let password = passwordTextField.text,
             email != "",
             password != ""
-        else {
-            displayWarningLabel(withText: "Информация о пользователе некорректна")
-            return
+            else {
+                displayWarningLabel(withText: "Информация о пользователе некорректна")
+                return
         }
         
         Auth.auth().createUser(withEmail: email, password: password) { [weak self] (user, error) in
@@ -113,17 +95,30 @@ final class LoginViewController: UIViewController {
     }
     
     
-    
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    //MARK:- OBJ-C Methods
+    @objc func keyBoardDidHide(notification: Notification) {
+        guard let userInfo = notification.userInfo else { return }
+        let keyBoardFrameSize = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        
+        (self.view as! UIScrollView).contentSize = CGSize(width: self.view.bounds.size.width, height: self.view.bounds.size.height + keyBoardFrameSize.height)
+        
+        (self.view as! UIScrollView).scrollIndicatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyBoardFrameSize.height, right: 0)
     }
-    */
-
+    
+    @objc func keyBoardDidShow(notification: Notification) {
+        (self.view as! UIScrollView).contentSize = CGSize(width: self.view.bounds.size.width, height: self.view.bounds.size.height)
+    }
+    
+    // MARK:- Other Functions
+    func displayWarningLabel(withText: String) {
+        warningLabel.text = withText
+        
+        UIView.animate(withDuration: 3, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseInOut, animations: { [weak self] in
+            self?.warningLabel.alpha = 1
+        }) { [weak self] complete in
+            self?.warningLabel.alpha = 0
+        }
+    }
+    
+    
 }

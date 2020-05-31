@@ -22,7 +22,6 @@ final class FetchCatalogService {
     // MARK:- Inits
     init() {
         requestsCollectionRef = Firestore.firestore().collection("catalog-products")
-        
         fetchData()
     }
     

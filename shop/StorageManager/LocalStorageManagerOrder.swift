@@ -8,19 +8,19 @@
 import Foundation
 import RealmSwift
 
-class LocalStorageManagerOrders {
+final class LocalStorageManagerOrders {
     
+    // MARK:- Save object in Realm
     static func saveObject(_ orderProduct: OrderProduct) {
         try! realm.write {
             realm.add(orderProduct)
         }
     }
     
+    // MARK:- Delete object from Realm
     static func deleteObject(_ orderProduct: OrderProduct) {
         try! realm.write {
             realm.delete(orderProduct)
         }
-        
     }
-    
 }

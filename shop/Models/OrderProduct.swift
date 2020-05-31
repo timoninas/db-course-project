@@ -6,10 +6,9 @@
 //  Copyright © 2020 Антон Тимонин. All rights reserved.
 //
 
-import Foundation
 import RealmSwift
 
-class OrderProduct: Object {
+final class OrderProduct: Object {
     @objc dynamic var id: Int = 0
     @objc dynamic var price: Int = 0
     @objc dynamic var type: String = ""
