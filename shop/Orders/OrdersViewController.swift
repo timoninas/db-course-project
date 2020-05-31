@@ -60,7 +60,6 @@ final class OrdersViewController: UIViewController {
         updatePrice()
         setupEmail()
         
-        
         requestsCollectionRef = Firestore.firestore().collection("users-info")
     }
     
@@ -83,19 +82,25 @@ final class OrdersViewController: UIViewController {
     }
     
     @IBAction func promocodeTapped(_ sender: UIBarButtonItem) {
-        presentAlertWithTextField()
+        presentAlertForPromocode()
     }
     
     @IBAction func buyTapped(_ sender: UIButton) {
-        let fromOrder = FormOrderService(profile: profile,
-                                         products: filteredProducts,
-                                         discount: promocodeService.checkPromocode(promocode: _promocode))
-        fromOrder.makePersonalOrder()
-        for product in filteredProducts {
-            LocalStorageManagerOrders.deleteObject(product)
+        if _totalPrice != 0 {
+            presentAlertForOrder()
+        } else {
+            presentAlertEmptyBasket()
         }
-        self.tableView.reloadData()
-        updatePrice()
+        
+//        let fromOrder = FormOrderService(profile: profile,
+//                                         products: filteredProducts,
+//                                         discount: promocodeService.checkPromocode(promocode: _promocode))
+//        fromOrder.makePersonalOrder()
+//        for product in filteredProducts {
+//            LocalStorageManagerOrders.deleteObject(product)
+//        }
+//        self.tableView.reloadData()
+//        updatePrice()
     }
     
     
@@ -168,13 +173,40 @@ final class OrdersViewController: UIViewController {
         self.phoneNumberLabel.text = profile.phone
         self.cardNumberLabel.text = profile.cardNumber
     }
+    
+    private func presentAlertEmptyBasket() {
+        let alertController = UIAlertController(title: "Предупреждение", message: "Ваша корзина пуста!", preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "Хорошо", style: .cancel))
+        present(alertController, animated: true, completion: nil)
+    }
 
-    private func presentAlertWithTextField() {
+    private func presentAlertForOrder() {
+        let alertController = UIAlertController(title: "Первое предупреждение", message: "Вы точно хотите совершить покупку?", preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "Купить", style: .default, handler: {[weak self] action in
+            self?.formOrder()
+            self?.tableView.reloadData()
+            self?.updatePrice()
+        }))
+        alertController.addAction(UIAlertAction(title: "Отмена", style: .cancel))
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    private func formOrder() {
+        let fromOrder = FormOrderService(profile: profile,
+                                         products: filteredProducts,
+                                         discount: promocodeService.checkPromocode(promocode: _promocode))
+        fromOrder.makePersonalOrder()
+        for product in filteredProducts {
+            LocalStorageManagerOrders.deleteObject(product)
+        }
+    }
+    
+    private func presentAlertForPromocode() {
         let alertController = UIAlertController(title: "Введите промокод", message: "", preferredStyle: .alert)
         alertController.addTextField { textField in
             textField.placeholder = "Промокод"
         }
-        let confirmAction = UIAlertAction(title: "OK", style: .default) { [weak alertController] _ in
+        let confirmAction = UIAlertAction(title: "Ок", style: .default) { [weak alertController] _ in
             guard let alertController = alertController, let textField = alertController.textFields?.first else { return }
             
             self._promocode = textField.text ?? ""
@@ -182,7 +214,7 @@ final class OrdersViewController: UIViewController {
             //compare the current password and do action here
         }
         alertController.addAction(confirmAction)
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let cancelAction = UIAlertAction(title: "Отмена", style: .cancel, handler: nil)
         alertController.addAction(cancelAction)
         present(alertController, animated: true, completion: nil)
     }

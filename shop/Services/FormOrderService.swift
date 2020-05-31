@@ -35,7 +35,8 @@ final class FormOrderService {
                                                  "productsID":sender.productsID,
                                                  "discount":sender.discount,
                                                  "price":price,
-                                                 "isCompleted": false])
+                                                 "isCompleted": false,
+                                                 "isProcessed":false])
     }
     
     // MARK: Public functions

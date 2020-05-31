@@ -22,16 +22,16 @@ final class FetchCatalogService {
     // MARK:- Inits
     init() {
         requestsCollectionRef = Firestore.firestore().collection("catalog-products")
-        fetchData()
     }
     
     // MARK: Public functions
-    func fetchData() {
+    func fetchData(completion: @escaping () -> ()) {
         requestsCollectionRef.getDocuments { [weak self] (snapshot, error) in
             if let error = error {
                 debugPrint("Error fetching requests: \(error)")
+                completion()
             } else {
-                guard let snap = snapshot else { return }
+                guard let snap = snapshot else { completion(); return }
                 for product in snap.documents {
                     let data = product.data()
                     //let docID = product.documentID
@@ -60,6 +60,7 @@ final class FetchCatalogService {
                     
                     self?._products.append(newProduct)
                 }
+                completion()
             }
         }
     }
