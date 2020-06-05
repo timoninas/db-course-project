@@ -17,6 +17,7 @@ class AdminViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        DLog.shared.log(messages: "start did loading")
         
         self.navigationItem.title = "Админ"
         self.view.backgroundColor = .white
@@ -33,6 +34,7 @@ class AdminViewController: UIViewController {
             self.orders.append(contentsOf: fetchUsersOrdersService.orders)
             self.tableView.reloadData()
         }
+        DLog.shared.log(messages: "end did loading")
     }
     
     private func setupTableView() {

@@ -36,7 +36,10 @@ final class DetailSubjectViewController: UITableViewController {
         }
         
         if product.imageURLString != nil {
-            guard let url = URL(string: (product.imageURLString)!) else { return }
+            guard let url = URL(string: (product.imageURLString)!) else {
+                DLog.shared.log(messages: "Error fetching image by using URL")
+                return
+            }
             self.mainImageView.kf.setImage(with: url)
         }
         idLabel.text = "id: \(product.id)"

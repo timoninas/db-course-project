@@ -18,9 +18,12 @@ final class PromocodeService {
     required init() {
         requestsCollectionRef = Firestore.firestore().collection("promocodes")
         
+        //DLog.shared.log(messages: "Error fetching catalog")
         requestsCollectionRef.getDocuments { [weak self] (snapshot, error) in
-            guard error == nil else { return }
-            guard let snap = snapshot else { return }
+            guard error == nil, let snap = snapshot else {
+                DLog.shared.log(messages: "Error fetching promocode")
+                return
+            }
             
             for code in snap.documents {
                 let data = code.data()
@@ -28,6 +31,7 @@ final class PromocodeService {
                 let value = data["value"] as? Int ?? 0
                 self?.promocodes[comparable] = value
             }
+            DLog.shared.log(messages: "End fetching promocode")
         }
     }
     

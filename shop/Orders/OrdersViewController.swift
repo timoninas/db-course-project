@@ -46,6 +46,7 @@ final class OrdersViewController: UIViewController {
     // MARK:- View Did Load
     override func viewDidLoad() {
         super.viewDidLoad()
+        DLog.shared.log(messages: "start did loading")
         
         filteredProducts = realm.objects(OrderProduct.self)
         self.tableView.dataSource = self
@@ -61,22 +62,26 @@ final class OrdersViewController: UIViewController {
         setupEmail()
         
         requestsCollectionRef = Firestore.firestore().collection("users-info")
+        DLog.shared.log(messages: "end did loading")
     }
     
     // MARK:- View Will Appear
     override func viewWillAppear(_ animated: Bool) {
+        DLog.shared.log(messages: "start appearing")
         super.viewWillAppear(true)
         tableView.reloadData()
         updatePrice()
         downloadProfile()
+        DLog.shared.log(messages: "end appearing")
     }
     
     //MARK:- IBActions
     @IBAction func logoutTapped(_ sender: UIBarButtonItem) {
         do {
             try Auth.auth().signOut()
+            DLog.shared.log(messages: "Logout from OrderVC")
         } catch {
-            print(error.localizedDescription)
+            DLog.shared.log(messages: "\(error.localizedDescription)")
         }
         dismiss(animated: true, completion: nil)
     }
@@ -143,7 +148,10 @@ final class OrdersViewController: UIViewController {
     private func downloadProfile() {
         requestsCollectionRef.getDocuments { [weak self] (snapshot, error) in
             //            guard error != nil else { return }
-            guard let snap = snapshot else { return }
+            guard let snap = snapshot else {
+                DLog.shared.log(messages: "Error fetching profile")
+                return
+            }
             
             for user in snap.documents {
                 let data = user.data()
@@ -164,6 +172,7 @@ final class OrdersViewController: UIViewController {
                     break
                 }
             }
+            DLog.shared.log(messages: "End fetching profile")
         }
     }
     

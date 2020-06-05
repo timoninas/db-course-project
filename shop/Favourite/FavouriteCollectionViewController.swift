@@ -18,16 +18,18 @@ final class FavouriteCollectionViewController: UICollectionViewController {
     // MARK:- View Did Load
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        DLog.shared.log(messages: "start did loading")
         filteredProducts = realm.objects(FavouriteProduct.self)
         
-        print("added")
+        DLog.shared.log(messages: "end did loading")
     }
     
     // MARK:- View Will Appear
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        DLog.shared.log(messages: "start appearing")
         collectionView.reloadData()
+        DLog.shared.log(messages: "end appearing")
     }
 }
 
@@ -45,7 +47,10 @@ extension FavouriteCollectionViewController {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "showFavouriteSubject",
                                                       for: indexPath) as! FavouriteViewCell
         
-        guard indexPath.row < filteredProducts.count else { return UICollectionViewCell() }
+        guard indexPath.row < filteredProducts.count else {
+            DLog.shared.log(messages: "indexPath.row < filteredProducts.count")
+            return UICollectionViewCell()
+        }
         
         let filteredProduct = filteredProducts[indexPath.row]
         cell.layer.borderWidth = 0.25

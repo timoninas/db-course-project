@@ -22,9 +22,12 @@ class FetchUsersOrdersService {
     }
     
     func fetchData(completion: @escaping () -> ()) {
+        //DLog.shared.log(messages: "End fetching requests")
         requestsCollectionRef.getDocuments { [weak self] (snapshot, error) in
-            guard error == nil else { completion(); return }
-            guard let snap = snapshot else { completion(); return }
+            guard error == nil, let snap = snapshot else {
+                DLog.shared.log(messages: "Error fetching users-orders")
+                completion();
+                return }
             
             for admins in snap.documents {
                 let data = admins.data()
@@ -44,6 +47,7 @@ class FetchUsersOrdersService {
                 }
                 
             }
+            DLog.shared.log(messages: "End fetching users-orders")
             completion()
         }
     }

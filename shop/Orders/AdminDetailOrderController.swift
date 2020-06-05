@@ -17,8 +17,9 @@ class AdminDetailOrderController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        setupTableView() 
+        DLog.shared.log(messages: "start did loading")
+        setupTableView()
+        DLog.shared.log(messages: "end did loading")
     }
     
     private func setupTableView() {
@@ -43,7 +44,10 @@ extension AdminDetailOrderController: UITableViewDataSource {
         let product = products[indexPath.row]
 
         if product.imageData != nil {
-            guard let imgData = product.imageData, let image = UIImage(data: imgData) else { return UITableViewCell()}
+            guard let imgData = product.imageData, let image = UIImage(data: imgData) else {
+                DLog.shared.log(messages: "Error fetching image by using URL")
+                return UITableViewCell()
+            }
             cell?.imageView!.image = image
             cell?.imageView?.layer.cornerRadius = 5
             cell?.imageView?.layer.borderWidth = 0.25

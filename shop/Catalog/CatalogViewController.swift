@@ -37,57 +37,48 @@ final class CatalogViewController: UICollectionViewController {
     // MARK:- ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
+        DLog.shared.log(messages: "start did loading")
         let tmpImage = resizeImage(image: #imageLiteral(resourceName: "up"), targetSize: CGSize(width: 21, height: 21))
         sortNavButton.image = tmpImage
         
-        requestsCollectionRef = Firestore.firestore().collection("catalog-products")
-
-        requestsCollectionRef.getDocuments { [weak self] (snapshot, error) in
-            if let error = error {
-                debugPrint("Error fetching requests: \(error)")
-            } else {
-                guard let snap = snapshot else { return }
-                for product in snap.documents {
-                    let data = product.data()
-                    //let docID = product.documentID
-
-                    let id = data["id"] as? Int ?? 0
-
-                    let imageURL = data["imageURL"] as? String ?? ""
-
-                    let url = URL(string: imageURL)
-                    let dataImage = try? Data(contentsOf: url!)
-                    let name = data["name"] as? String ?? ""
-                    let length = data["length"] as? Int ?? 0
-                    let price = data["price"] as? Int ?? 0
-                    let type = data["type"] as? String ?? ""
-                    let weight = data["weight"] as? Int ?? 0
-                    let width = data["width"] as? Int ?? 0
-
-                    let newProduct = Product(id: id,
-                                             price: price,
-                                             type: type,
-                                             weight: weight,
-                                             length: length,
-                                             width: width,
-                                             name: name,
-                                             imageData: dataImage!)
-
-                    self?.products.append(newProduct)
-                    self?.filteredProducts.append(newProduct)
-
-                }
-                self?.filterService = FilterService(initProducts: self!.products)
-                self!.filteredProducts = self?.filterService?.filterByPrice() as! [Product]
-                self?.collectionView.reloadData()
-            }
+        let fetchCatalogService = FetchCatalogService()
+        fetchCatalogService.fetchData {
+            self.products = fetchCatalogService.product
+            self.filteredProducts = fetchCatalogService.product
+            self.filterService = FilterService(initProducts: self.products)
+            self.filteredProducts = self.filterService?.filterByPrice() as! [Product]
+            self.collectionView.reloadData()
         }
-    }
-    
-    // MARK:- ViewWillAppear
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
         
+        
+//        ref = Database.database().reference()
+//        self.databaseHandle = self.ref?.child("subject").observe(.value, with: {[weak self] (snapshot) in
+//            let subjects = snapshot.value as? [[String:Any]]
+//            //let imageURL = subject?["imageURL"] as? String
+//            let subjectCount = subjects?.count
+//            
+//            for i in 0..<subjectCount! {
+//                
+//                let subject = subjects![i]
+//                let id = subject["id"] as? Int
+//                let imageURL = subject["imageURL"] as? String
+//                let type = subject["type"] as? String
+//                let length = subject["length"] as? Int
+//                let name = subject["name"] as? String
+//                let weight = subject["weight"] as? Int
+//                let price = subject["price"] as? Int
+//                let width = subject["width"] as? Int
+//                
+//                let product = Product(id: id!, price: price!, type: type!, weight: weight!, length: length!, width: width!, name: name!, imageURLString: imageURL!)
+//                
+//                self?.products.append(product)
+//                self?.filteredProducts.append(product)
+//                self?.collectionView.reloadData()
+//            }
+//        })
+        
+
+        DLog.shared.log(messages: "end did loading")
     }
     
     // MARK:- IBActions

@@ -18,9 +18,12 @@ final class AdminService {
     }
     
     init(isAdminEmail email: String) {
+        // DLog.shared.log(messages: "order added")
         requestsCollectionRef.getDocuments { [weak self] (snapshot, error) in
-            guard error == nil else { return }
-            guard let snap = snapshot else { return }
+            guard error == nil, let snap = snapshot else {
+                DLog.shared.log(messages: "Error fetching admins")
+                return
+            }
             
             for admins in snap.documents {
                 let data = admins.data()
@@ -29,6 +32,7 @@ final class AdminService {
                     self?._isAdmin = true
                 }
             }
+            DLog.shared.log(messages: "End fetching admins")
         }
     }
 }

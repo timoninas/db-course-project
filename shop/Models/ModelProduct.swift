@@ -53,3 +53,27 @@ struct Product {
         self.imageURLString = imageURLString
     }
 }
+
+struct NewPorudct {
+    var id: Int = 0
+    var price: Int = 0
+    var type: String = ""
+    var weight: Int = 0
+    var length: Int? = 0
+    var width: Int? = 0
+    var name: String = ""
+    var imageURLString: String?
+    
+    init() {
+        self.type = ""
+        self.id = 0
+        self.price = 0
+        self.weight = 0
+        self.length = 0
+        self.width = 0
+        self.name = ""
+        self.imageURLString = ""
+    }
+}
+
+

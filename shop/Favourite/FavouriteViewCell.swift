@@ -33,7 +33,9 @@ final class FavouriteViewCell: UICollectionViewCell {
     // MARK:-Public functions
     func setup() {
         if product?.imageData != nil {
-            guard let imgData = product?.imageData, let image = UIImage(data: imgData) else { return }
+            guard let imgData = product?.imageData, let image = UIImage(data: imgData) else {
+                return
+            }
             mainImageView.image = image
         }
         

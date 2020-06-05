@@ -6,9 +6,9 @@
 //  Copyright © 2020 Антон Тимонин. All rights reserved.
 //
 
-import Foundation
 import RealmSwift
 import FirebaseFirestore
+import UIKit
 
 final class FormOrderService {
     // MARK: Private variables
@@ -28,6 +28,8 @@ final class FormOrderService {
     
     // MARK: Private functions
     private func sendOrder(sender: Order) {
+        
+        
         requestsCollectionRef.addDocument(data: ["name":sender.name,
                                                  "family":sender.family,
                                                  "cardnumber":sender.cardNumber,
@@ -37,6 +39,7 @@ final class FormOrderService {
                                                  "price":price,
                                                  "isCompleted": false,
                                                  "isProcessed":false])
+        DLog.shared.log(messages: "order added")
     }
     
     // MARK: Public functions

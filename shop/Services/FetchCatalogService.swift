@@ -28,6 +28,7 @@ final class FetchCatalogService {
     func fetchData(completion: @escaping () -> ()) {
         requestsCollectionRef.getDocuments { [weak self] (snapshot, error) in
             if let error = error {
+                DLog.shared.log(messages: "Error fetching catalog")
                 debugPrint("Error fetching requests: \(error)")
                 completion()
             } else {
@@ -60,6 +61,7 @@ final class FetchCatalogService {
                     
                     self?._products.append(newProduct)
                 }
+                DLog.shared.log(messages: "End fetching catalog")
                 completion()
             }
         }

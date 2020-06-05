@@ -30,6 +30,7 @@ final class LoginViewController: UIViewController {
         
         Auth.auth().addStateDidChangeListener { [weak self](auth, user) in
             if user != nil {
+                DLog.shared.log(messages: "Authentication is successful")
                 self?.performSegue(withIdentifier: (self?.segueIdentifier)!, sender: nil)
             }
         }
@@ -53,15 +54,18 @@ final class LoginViewController: UIViewController {
             password != ""
             else {
                 displayWarningLabel(withText: "Информация о пользователе некорректна")
+                DLog.shared.log(messages: "Информация о пользователе некорректна")
                 return
         }
         
         Auth.auth().signIn(withEmail: email, password: password) { [weak self] (user, error) in
             if error != nil {
                 self?.displayWarningLabel(withText: "Error occured")
+                DLog.shared.log(messages: "Error occured")
                 return
             }
             if user != nil {
+                DLog.shared.log(messages: "Authentication is successful")
                 self?.performSegue(withIdentifier: (self?.segueIdentifier)!, sender: nil)
                 return
             }
@@ -77,6 +81,7 @@ final class LoginViewController: UIViewController {
             email != "",
             password != ""
             else {
+                DLog.shared.log(messages: "Информация о пользователе некорректна")
                 displayWarningLabel(withText: "Информация о пользователе некорректна")
                 return
         }
@@ -86,10 +91,11 @@ final class LoginViewController: UIViewController {
                 if user != nil {
                     //self?.performSegue(withIdentifier: (self?.segueIdentifier)!, sender: nil)
                 } else {
+                    DLog.shared.log(messages: "User is not created")
                     print("User is not created")
                 }
             } else {
-                print(error?.localizedDescription)
+                DLog.shared.log(messages: "\(error?.localizedDescription)")
             }
         }
     }

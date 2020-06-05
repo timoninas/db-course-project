@@ -23,6 +23,7 @@
 		774A29B0245DE958004A6FD1 /* CatalogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774A29AF245DE958004A6FD1 /* CatalogViewController.swift */; };
 		774A29B2245DEFC8004A6FD1 /* ModelProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774A29B1245DEFC8004A6FD1 /* ModelProduct.swift */; };
 		774A29B5245F0C16004A6FD1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 774A29B4245F0C16004A6FD1 /* GoogleService-Info.plist */; };
+		77520DE2248A5C7D001404FD /* Dlog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77520DE1248A5C7D001404FD /* Dlog.swift */; };
 		775F75DE2482FD29005B5E0A /* FilterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775F75DD2482FD29005B5E0A /* FilterService.swift */; };
 		775F75E024830980005B5E0A /* FetchCatalogService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775F75DF24830980005B5E0A /* FetchCatalogService.swift */; };
 		7762C309247FB753004A71CA /* ProductAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7762C308247FB753004A71CA /* ProductAdapter.swift */; };
@@ -62,6 +63,7 @@
 		774A29AF245DE958004A6FD1 /* CatalogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogViewController.swift; sourceTree = "<group>"; };
 		774A29B1245DEFC8004A6FD1 /* ModelProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelProduct.swift; sourceTree = "<group>"; };
 		774A29B4245F0C16004A6FD1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		77520DE1248A5C7D001404FD /* Dlog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dlog.swift; sourceTree = "<group>"; };
 		775F75DD2482FD29005B5E0A /* FilterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterService.swift; sourceTree = "<group>"; };
 		775F75DF24830980005B5E0A /* FetchCatalogService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchCatalogService.swift; sourceTree = "<group>"; };
 		7762C308247FB753004A71CA /* ProductAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductAdapter.swift; sourceTree = "<group>"; };
@@ -123,6 +125,7 @@
 				7767A7F72459E548007BED87 /* Orders */,
 				77C72145247C4B240086742D /* StorageManager */,
 				775F75DC2482FC09005B5E0A /* Services */,
+				77520DE3248A5C86001404FD /* Log */,
 				772FBA8024597D3700BC5485 /* Assets.xcassets */,
 				770F51142475596D003A8776 /* Main.storyboard */,
 				772FBA8224597D3700BC5485 /* LaunchScreen.storyboard */,
@@ -143,6 +146,14 @@
 				77D51DC324804468003B44A5 /* Profile.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		77520DE3248A5C86001404FD /* Log */ = {
+			isa = PBXGroup;
+			children = (
+				77520DE1248A5C7D001404FD /* Dlog.swift */,
+			);
+			path = Log;
 			sourceTree = "<group>";
 		};
 		775F75DC2482FC09005B5E0A /* Services */ = {
@@ -359,6 +370,7 @@
 				7707BF432483A8D70049FD64 /* AdminService.swift in Sources */,
 				774A29B2245DEFC8004A6FD1 /* ModelProduct.swift in Sources */,
 				77D01640245D979A00CE087B /* DetailSubjectViewController.swift in Sources */,
+				77520DE2248A5C7D001404FD /* Dlog.swift in Sources */,
 				7767A7F92459E562007BED87 /* CatalogViewCell.swift in Sources */,
 				77C72144247C4B1F0086742D /* LocalStorageManagerFavourites.swift in Sources */,
 				77C7214A247C61210086742D /* FavouriteProduct.swift in Sources */,

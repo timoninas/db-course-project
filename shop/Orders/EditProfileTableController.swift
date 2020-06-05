@@ -27,15 +27,18 @@ final class EditProfileTableController: UITableViewController {
     //MARK:- View Did Load
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        DLog.shared.log(messages: "start did loading")
         requestsCollectionRef = Firestore.firestore().collection("users-info")
         test = Firestore.firestore().collection("user-orders")
+        DLog.shared.log(messages: "end did loading")
     }
     
     // MARK:- View Will Appear
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        DLog.shared.log(messages: "start appearing")
         setupTextFields()
+        DLog.shared.log(messages: "end appearing")
     }
     
     // MARK:- IBActions
@@ -48,6 +51,7 @@ final class EditProfileTableController: UITableViewController {
                                                        "family":family,
                                                        "phone":phoneNumber,
                                                        "cardnumber":cardNumber])
+        DLog.shared.log(messages: "Added/changed profile")
         
         self.navigationController?.popViewController(animated: true)
     }
