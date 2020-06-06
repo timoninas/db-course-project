@@ -6,7 +6,7 @@
 //  Copyright © 2020 Антон Тимонин. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 final class ProductAdapter {
     
@@ -14,7 +14,9 @@ final class ProductAdapter {
         let favouriteProduct = FavouriteProduct()
         
         favouriteProduct.id = product.id
-        favouriteProduct.imageData = product.imageData!
+        let img = #imageLiteral(resourceName: "face").pngData()
+        let image = product.imageData ?? img
+        favouriteProduct.imageData = image!
         favouriteProduct.length = product.length!
         favouriteProduct.name = product.name
         favouriteProduct.price = product.price

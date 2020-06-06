@@ -19,6 +19,7 @@
 		772FBA7A24597D3400BC5485 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772FBA7924597D3400BC5485 /* SceneDelegate.swift */; };
 		772FBA8124597D3700BC5485 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 772FBA8024597D3700BC5485 /* Assets.xcassets */; };
 		772FBA8424597D3700BC5485 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 772FBA8224597D3700BC5485 /* LaunchScreen.storyboard */; };
+		77471E6E248AB95A00AC4EAD /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77471E6D248AB95A00AC4EAD /* Config.swift */; };
 		774781BC2459E2C100AC3C54 /* FavouriteCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774781BB2459E2C100AC3C54 /* FavouriteCollectionViewController.swift */; };
 		774A29B0245DE958004A6FD1 /* CatalogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774A29AF245DE958004A6FD1 /* CatalogViewController.swift */; };
 		774A29B2245DEFC8004A6FD1 /* ModelProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774A29B1245DEFC8004A6FD1 /* ModelProduct.swift */; };
@@ -59,6 +60,7 @@
 		772FBA8024597D3700BC5485 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		772FBA8324597D3700BC5485 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		772FBA8524597D3700BC5485 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		77471E6D248AB95A00AC4EAD /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		774781BB2459E2C100AC3C54 /* FavouriteCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteCollectionViewController.swift; sourceTree = "<group>"; };
 		774A29AF245DE958004A6FD1 /* CatalogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogViewController.swift; sourceTree = "<group>"; };
 		774A29B1245DEFC8004A6FD1 /* ModelProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelProduct.swift; sourceTree = "<group>"; };
@@ -152,6 +154,7 @@
 			isa = PBXGroup;
 			children = (
 				77520DE1248A5C7D001404FD /* Dlog.swift */,
+				77471E6D248AB95A00AC4EAD /* Config.swift */,
 			);
 			path = Log;
 			sourceTree = "<group>";
@@ -377,6 +380,7 @@
 				77C7214C247C64C20086742D /* FavouriteViewCell.swift in Sources */,
 				7707BF412483A82E0049FD64 /* AdminViewController.swift in Sources */,
 				77882E792481A1B8002E5514 /* PromocodeService.swift in Sources */,
+				77471E6E248AB95A00AC4EAD /* Config.swift in Sources */,
 				77DBEA95245F3A6400959EB9 /* OrdersViewController.swift in Sources */,
 				7707BF452483C5160049FD64 /* FetchUsersOrdersService.swift in Sources */,
 				774781BC2459E2C100AC3C54 /* FavouriteCollectionViewController.swift in Sources */,

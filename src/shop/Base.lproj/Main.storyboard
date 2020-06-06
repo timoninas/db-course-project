@@ -239,11 +239,18 @@
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" title="Каталог" id="maj-Fw-2Jg">
-                        <barButtonItem key="leftBarButtonItem" title="Item" id="gJB-0q-PDa">
-                            <connections>
-                                <action selector="sortButtonTapped:" destination="wb7-9l-CTY" id="Vqt-ie-ncE"/>
-                            </connections>
-                        </barButtonItem>
+                        <leftBarButtonItems>
+                            <barButtonItem title="Item" id="gJB-0q-PDa">
+                                <connections>
+                                    <action selector="sortButtonTapped:" destination="wb7-9l-CTY" id="Vqt-ie-ncE"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="🤙🏻" id="p46-ZO-gP4">
+                                <connections>
+                                    <action selector="changeBD:" destination="wb7-9l-CTY" id="sG3-fT-vU6"/>
+                                </connections>
+                            </barButtonItem>
+                        </leftBarButtonItems>
                         <barButtonItem key="rightBarButtonItem" title="Filter" id="Ljv-kC-h4S">
                             <connections>
                                 <action selector="filterButtonTapped:" destination="wb7-9l-CTY" id="eUV-0z-Dq4"/>

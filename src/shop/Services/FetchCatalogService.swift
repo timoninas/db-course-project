@@ -7,20 +7,32 @@
 //
 
 import UIKit
+import Firebase
 import FirebaseFirestore
 
-final class FetchCatalogService {
-    // MARK: Private variables
-    private var _products = [Product]()
-    private var requestsCollectionRef: CollectionReference!
-    
-    // MARK: Public variables
+protocol Fetching {
+    func fetchData(completion: @escaping () -> ())
+}
+
+class FetchService {
+    var _products = [Product]()
     public var product: [Product] {
         return _products
     }
+}
+
+final class FetchCatalogService: FetchService, Fetching {
+    // MARK: Private variables
+//    private var _products = [Product]()
+    private var requestsCollectionRef: CollectionReference!
+    
+    // MARK: Public variables
+//    public var product: [Product] {
+//        return _products
+//    }
     
     // MARK:- Inits
-    init() {
+    required override init() {
         requestsCollectionRef = Firestore.firestore().collection("catalog-products")
     }
     
@@ -67,3 +79,43 @@ final class FetchCatalogService {
         }
     }
 }
+
+final class FetchCatalogServiceA: FetchService, Fetching {
+    // MARK: Private variables
+    private var ref:DatabaseReference?
+    private var databaseHandle: DatabaseHandle?
+    
+    // MARK: Public variables
+    
+    // MARK:- Inits
+    required override init() {
+        ref = Database.database().reference()
+    }
+    
+    // MARK: Public functions
+    func fetchData(completion: @escaping () -> ()) {
+        self.databaseHandle = self.ref?.child("subject").observe(.value, with: {[weak self] (snapshot) in
+            let subjects = snapshot.value as? [[String:Any]]
+            //let imageURL = subject?["imageURL"] as? String
+            let subjectCount = subjects?.count
+            
+            for i in 0..<subjectCount! {
+                let subject = subjects![i]
+                let id = subject["id"] as? Int
+                let imageURL = subject["imageURL"] as? String
+                let type = subject["type"] as? String
+                let length = subject["length"] as? Int
+                let name = subject["name"] as? String
+                let weight = subject["weight"] as? Int
+                let price = subject["price"] as? Int
+                let width = subject["width"] as? Int
+                
+                let product = Product(id: id!, price: price!, type: type!, weight: weight!, length: length!, width: width!, name: name!, imageURLString: imageURL!)
+                
+                self?._products.append(product)
+            }
+            completion()
+        })
+    }
+}
+

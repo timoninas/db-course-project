@@ -23,7 +23,8 @@ final class CatalogViewController: UICollectionViewController {
     private var ref:DatabaseReference?
     private var databaseHandle: DatabaseHandle?
     private var filterService: FilterService?
-    private var fetchCatalogService: FetchCatalogService?
+//    private var fetchCatalogService: FetchCatalogService?
+//    private var fetchCatalogServiceA: FetchCatalogServiceA?
     private var requestsCollectionRef: CollectionReference!
     
     // MARK: Public variables
@@ -41,43 +42,26 @@ final class CatalogViewController: UICollectionViewController {
         let tmpImage = resizeImage(image: #imageLiteral(resourceName: "up"), targetSize: CGSize(width: 21, height: 21))
         sortNavButton.image = tmpImage
         
-        let fetchCatalogService = FetchCatalogService()
-        fetchCatalogService.fetchData {
-            self.products = fetchCatalogService.product
-            self.filteredProducts = fetchCatalogService.product
-            self.filterService = FilterService(initProducts: self.products)
-            self.filteredProducts = self.filterService?.filterByPrice() as! [Product]
-            self.collectionView.reloadData()
-        }
+        downloadCatalog()
         
+//        let fetchCatalogService = FetchCatalogService()
+//        fetchCatalogService.fetchData {
+//            self.products = fetchCatalogService.product
+//            self.filteredProducts = fetchCatalogService.product
+//            self.filterService = FilterService(initProducts: self.products)
+//            self.filteredProducts = self.filterService?.filterByPrice() as! [Product]
+//            self.collectionView.reloadData()
+//        }
         
-//        ref = Database.database().reference()
-//        self.databaseHandle = self.ref?.child("subject").observe(.value, with: {[weak self] (snapshot) in
-//            let subjects = snapshot.value as? [[String:Any]]
-//            //let imageURL = subject?["imageURL"] as? String
-//            let subjectCount = subjects?.count
-//            
-//            for i in 0..<subjectCount! {
-//                
-//                let subject = subjects![i]
-//                let id = subject["id"] as? Int
-//                let imageURL = subject["imageURL"] as? String
-//                let type = subject["type"] as? String
-//                let length = subject["length"] as? Int
-//                let name = subject["name"] as? String
-//                let weight = subject["weight"] as? Int
-//                let price = subject["price"] as? Int
-//                let width = subject["width"] as? Int
-//                
-//                let product = Product(id: id!, price: price!, type: type!, weight: weight!, length: length!, width: width!, name: name!, imageURLString: imageURL!)
-//                
-//                self?.products.append(product)
-//                self?.filteredProducts.append(product)
-//                self?.collectionView.reloadData()
-//            }
-//        })
+//        let fetchCatalogServiceA = FetchCatalogServiceA()
+//        fetchCatalogServiceA.fetchData {
+//            self.products = fetchCatalogServiceA.product
+//            self.filteredProducts = fetchCatalogServiceA.product
+//            self.filterService = FilterService(initProducts: self.products)
+//            self.filteredProducts = self.filterService?.filterByPrice() as! [Product]
+//            self.collectionView.reloadData()
+//        }
         
-
         DLog.shared.log(messages: "end did loading")
     }
     
@@ -92,7 +76,38 @@ final class CatalogViewController: UICollectionViewController {
         switchImageButton(sender)
     }
     
+    
+    @IBAction func changeBD(_ sender: UIBarButtonItem) {
+        downloadCatalog()
+    }
+    
     // MARK:- Functions
+    private func downloadCatalog() {
+        let state = Config.shared.isMainBD
+        
+        if state {
+            Config.shared.isMainBD = false
+            let fetchCatalogService = FetchCatalogService()
+            fetchCatalogService.fetchData {
+                self.products = fetchCatalogService.product
+                self.filteredProducts = fetchCatalogService.product
+                self.filterService = FilterService(initProducts: self.products)
+                self.filteredProducts = self.filterService?.filterByPrice() as! [Product]
+                self.collectionView.reloadData()
+            }
+        } else {
+            Config.shared.isMainBD = true
+            let fetchCatalogServiceA = FetchCatalogServiceA()
+            fetchCatalogServiceA.fetchData {
+                self.products = fetchCatalogServiceA.product
+                self.filteredProducts = fetchCatalogServiceA.product
+                self.filterService = FilterService(initProducts: self.products)
+                self.filteredProducts = self.filterService?.filterByPrice() as! [Product]
+                self.collectionView.reloadData()
+            }
+        }
+    }
+    
     private func presentAlertForFilterByType() {
         let alert = UIAlertController(title: "You can filtered products", message: "Chose your interest category", preferredStyle: .actionSheet)
         
