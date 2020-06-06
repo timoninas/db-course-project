@@ -6,15 +6,15 @@
 
 | Описание | Ссылка |
 | --- | --- |
-| Техническое задание | [Тз]() |
-| Расчетно-пояснительная записка  | [Рпз]() |
-| Презентация  | [Презентация]() |
+| Техническое задание | [Тз](https://github.com/timoninas/simple-shop/blob/master/reports/tz/тз.pdf) |
+| Расчетно-пояснительная записка  | [Рпз](https://github.com/timoninas/simple-shop/blob/master/reports/rpz/рпз.pdf) |
+| Презентация  | [Презентация](https://github.com/timoninas/simple-shop/blob/master/reports/presentation/презентация.pdf) |
 
 
 # Проектирование программного обеспечения; МГТУ; 6 семестр
 
 | :1234: | Описание | Отчет |
 | --- | --- | --- |
-| :one: | Программная реализация доступа к данным | [Отчет](https://github.com/timoninas/simple-shop/blob/master/reports/lab_01.pdf) |
-| :two: | Бизнес логика и тех. интерфейс | [Отчет]() |
-| :three: | Добавление простейший GUI, др. СУБД, логирования,  | [Отчет]() |
+| :one: | Программная реализация доступа к данным | [Отчет](https://github.com/timoninas/simple-shop/blob/master/reports/lab_01/lab_01.pdf) |
+| :two: | Бизнес логика и тех. интерфейс | [Отчет](https://github.com/timoninas/simple-shop/blob/master/reports/lab_02/lab_02.pdf) |
+| :three: | Добавление простейший GUI, др. СУБД, логирования,  | [Отчет](https://github.com/timoninas/simple-shop/blob/master/reports/lab_03/lab_03.pdf) |
